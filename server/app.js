@@ -10,7 +10,8 @@ const app = express();
 app.use(express.json());
 
 // Unauthenticated routes
-app.use(openRoutes);
+app.use('/api/questions', questionsRouter);
+app.use('/api/questions/:qId/answers', answersRouter);
 
 // Serve any static files
 if (process.env.NODE_ENV === 'production') {
@@ -18,8 +19,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Any authentication middleware and related routing would be here.
-app.use('/api/questions', questionsRouter);
-app.use('/api/questions/:qId/answers', answersRouter);
 
 // Handle React routing, return all requests to React app
 if (process.env.NODE_ENV === 'production') {
