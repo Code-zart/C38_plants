@@ -1,7 +1,8 @@
 require('./db/config');
 const express = require('express'),
   path = require('path'),
-  openRoutes = require('./routes/open');
+  questionsRouter = require('./middleware/routes/questions'),
+  answersRouter = require('./middleware/routes/answers');
 
 const app = express();
 
@@ -9,7 +10,8 @@ const app = express();
 app.use(express.json());
 
 // Unauthenticated routes
-app.use(openRoutes);
+app.use('/api/questions', questionsRouter);
+app.use('/api/questions/:qId/answers', answersRouter);
 
 // Serve any static files
 if (process.env.NODE_ENV === 'production') {
