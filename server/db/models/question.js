@@ -1,10 +1,21 @@
-const mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const { User } = require('../models/user');
+const { Answer } = require('../models/answer');
 
 const QuestionSchema = new Schema(
   {
-    question: { type: String, require: true },
-    answers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Answer' }]
+    question: { type: String, required: true },
+    answers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Answer' }],
+    // Something like this?
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+    },
+    // maybe
+    upvote: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    downvote: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
   },
   { timestamps: true }
 );
