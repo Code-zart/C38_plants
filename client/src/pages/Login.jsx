@@ -20,11 +20,11 @@ const Login = () => {
             <MDBCardBody className="mx-4">
               <div className="text-center">
                 <h3 className="purple-text mb-5">
-                  <strong>Log in To Your GrapeVine</strong>
+                  <strong>Log In</strong>
                 </h3>
               </div>
               <MDBInput
-                label="Your email"
+                label="Your e-mail"
                 group
                 type="email"
                 validate
@@ -51,11 +51,11 @@ const Login = () => {
                   rounded
                   className="btn-block z-depth-1a"
                 >
-                  Sign in
+                  Log in
                 </MDBBtn>
               </div>
               <p className="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2">
-                or Sign in with:
+                or Log in with:
               </p>
               <div className="row my-3 d-flex justify-content-center">
                 <MDBBtn
@@ -91,7 +91,7 @@ const Login = () => {
             <MDBModalFooter className="mx-1 pt-3 mb-2">
               <p className="font-small grey-text d-flex justify-content-start">
                 Not a member?
-                <a href="#!" className="purple-text ml-1">
+                <a href="/signup" className="purple-text ml-1">
                   Sign Up
                 </a>
               </p>
