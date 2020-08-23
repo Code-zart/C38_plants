@@ -1,8 +1,8 @@
 require('./db/config');
 const express = require('express'),
   path = require('path'),
-  questionsRouter = require('./middleware/routes/questions'),
-  answersRouter = require('./middleware/routes/answers');
+  questionsRouter = require('./db/routes/questions'),
+  answersRouter = require('./db/routes/answers');
 
 const app = express();
 

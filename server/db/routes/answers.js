@@ -35,4 +35,12 @@ router.route('/').get((req, res) => {
     .catch((err) => res.status(500).json('Error: ' + err));
 });
 
+// Update/Edit an existing answer
+
+// Delete a specific answer from a question
+
+// Upvote a specific answer
+
+// Downvote a specific answer
+
 module.exports = router;
