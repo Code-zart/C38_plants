@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 const NavigationBar = () => {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="white" expand="lg">
       <Navbar.Brand as={Link} to="/">
         GrapeVine
       </Navbar.Brand>

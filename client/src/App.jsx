@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import NavigationBar from './components/NavigationBar';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import FooterPage from './components/FooterPage';
 
 const App = () => {
   // const [serverMessage, setServerMessage] = useState('');
@@ -33,6 +34,7 @@ const App = () => {
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
         </Switch>
+        <FooterPage />
       </BrowserRouter>
     </AppContextProvider>
   );
