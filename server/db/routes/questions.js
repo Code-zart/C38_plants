@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { Question } = require('../../db/models/question');
+const { Question } = require('../../db/routes/questions');
 
 // Post a new question
 router.route('/').post((req, res) => {
