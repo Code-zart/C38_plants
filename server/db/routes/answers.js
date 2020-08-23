@@ -1,6 +1,6 @@
 const router = require('express').Router({ mergeParams: true });
-const { Question } = require('../../db/models/question');
-const { Answer } = require('../../db/models/answer');
+const { Question } = require('../models/question');
+const { Answer } = require('../models/answer');
 
 // Post an answer to a specific question
 router.route('/').post((req, res) => {
