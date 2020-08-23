@@ -8,6 +8,7 @@
     "concurrently": "^5.2.0",
     "dom": "^0.0.3",
     "express": "^4.17.1",
+    "mdbreact": "^4.27.0",
     "mongodb": "^3.5.8",
     "mongoose": "^5.10.0",
     "react": "^16.13.1",

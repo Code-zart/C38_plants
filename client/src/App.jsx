@@ -3,7 +3,7 @@ import { AppContextProvider } from './context/AppContext';
 // import ContextDemo from './components/ContextDemo';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-// import './App.css';
+import './App.css';
 import Home from './pages/Home';
 import Post from './pages/Post';
 import Profile from './pages/Profile';
