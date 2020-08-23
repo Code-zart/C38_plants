@@ -17,10 +17,10 @@ const FooterPage = () => {
             <h5 className="title">Creators</h5>
             <ul>
               <li className="list-unstyled">
-                <a href="#!">Link 1</a>
+                <a href="#!">Ana Maria Orduz</a>
               </li>
               <li className="list-unstyled">
-                <a href="#!">Link 2</a>
+                <a href="#!">Kenny </a>
               </li>
               <li className="list-unstyled">
                 <a href="#!">Link 3</a>
