@@ -1,9 +1,11 @@
-const router = require('express').Router();
+const router = require('express').Router({ mergeParams: true });
 
-const { Question } = require('../../db/routes/questions');
+const { Question } = require('../models/question');
 
-// Post a new question
-router.route('/').post((req, res) => {
+/**
+ * POST a new question
+ */
+router.post('/', (req, res) => {
   const question = new Question(req.body);
   question
     .save()
@@ -11,8 +13,10 @@ router.route('/').post((req, res) => {
     .catch((err) => res.status(500).json('Error: ', err));
 });
 
-// Get all questions
-router.route('/').get((req, res) => {
+/**
+ * GET all questions
+ */
+router.get('/', (req, res) => {
   Question.find().then((questions) =>
     res.json(questions).catch((err) => res.status(500).json('Error: ', err))
   );
@@ -20,10 +24,26 @@ router.route('/').get((req, res) => {
 
 // Get a specific question
 
-// Edit/Update a specific question
+/**
+ * UPDATE a specific question
+ */
+router.put('/:id', (req, res) => {
+  Question.findById(req.id)
+    .then((question) => {
+      question.text = req.body.text;
 
-// Delete a specific question
-router.route('/:id').delete((req, res) => {
+      question
+        .save()
+        .then(() => res.json('question updated!'))
+        .catch((err) => res.status(400).json('Error: ', err));
+    })
+    .catch((err) => res.status(400).json('Error: ', err));
+});
+
+/**
+ * DELETE a specific question
+ */
+router.delete('/:id', (req, res) => {
   Question.findByIdAndRemove(req.params.id)
     .then((question) => {
       if (!question) {
