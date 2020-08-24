@@ -7,9 +7,10 @@ import './App.css';
 import Home from './pages/Home';
 import Post from './pages/Post';
 import Profile from './pages/Profile';
-import NavigationBar from './components/NavigationBar';
+import NavbarPage from './components/NavbarPage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import FooterPage from './components/FooterPage';
 
 const App = () => {
   // const [serverMessage, setServerMessage] = useState('');
@@ -25,7 +26,7 @@ const App = () => {
   return (
     <AppContextProvider>
       <BrowserRouter>
-        <NavigationBar />
+        <NavbarPage />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/api/post" component={Post} />
@@ -33,6 +34,7 @@ const App = () => {
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
         </Switch>
+        <FooterPage />
       </BrowserRouter>
     </AppContextProvider>
   );
