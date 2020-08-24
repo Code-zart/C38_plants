@@ -2,8 +2,10 @@ const router = require('express').Router({ mergeParams: true });
 const { Question } = require('../models/question');
 const { Answer } = require('../models/answer');
 
-// Post an answer to a specific question
-router.route('/').post((req, res) => {
+/**
+ * POST answer to a question
+ */
+router.post('/', (req, res) => {
   const newAnswer = new Answer(req.body);
   newAnswer.question = req.params.qId;
 
@@ -24,23 +26,47 @@ router.route('/').post((req, res) => {
     .catch((err) => res.status(500).json('Error: ', err));
 });
 
-// Get all answers to a specific question
-router.route('/').get((req, res) => {
+/**
+ * GET all answers to a specific question
+ */
+router.get('/', (req, res) => {
   Question.findById(req.params.qId)
     .populate('answers')
     .exec()
     .then((questionWithAnswers) => {
       res.json(questionWithAnswers);
     })
-    .catch((err) => res.status(500).json('Error: ' + err));
+    .catch((err) => res.status(500).json('Error: ', err));
 });
 
-// Update/Edit an existing answer
+/**
+ * UPDATE a specific answer
+ */
+router.put('/:aId', (req, res) => {
+  let id = req.id;
+  let aId = req.params.answerId;
+  Answer.findById(req.params.aId)
+    .then((answer) => {
+      answer.text = req.body.text;
 
-// Delete a specific answer from a question
+      answer
+        .save()
+        .then(() => res.json('Answer updated!'))
+        .catch((err) => res.status(400).json('Error: ', err));
+    })
+    .catch((err) => res.status(400).json('Error: ', err));
+});
 
-// Upvote a specific answer
+/**
+ * DELETE a specific answer
+ */
+router.delete('/:aId', (req, res) => {
+  let id = req.id;
+  let aId = req.params.answerId;
 
-// Downvote a specific answer
+  Answer.findByIdAndDelete(req.params.aId)
+    .then(() => res.json('Answer deleted.'))
+    .catch((err) => res.status(400).json('Error: ', err));
+});
 
 module.exports = router;

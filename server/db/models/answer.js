@@ -5,17 +5,19 @@ const { Question } = require('../models/question');
 
 const AnswerSchema = new Schema(
   {
-    answer: { type: String, required: true },
-    question: { type: mongoose.Schema.Types.ObjectId, ref: 'Question' },
-
+    text: { type: String, required: true },
+    question: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Question',
+      required: true
+    },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true
     },
-    // maybe
-    upvote: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-    downvote: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+    upvotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    downvotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
   },
   { timestamps: true }
 );
