@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const { User } = require('../models/user');
-const { Answer } = require('../models/answer');
+const User = require('../models/user');
+const Answer = require('../models/answer');
 
 const QuestionSchema = new Schema(
   {
@@ -19,4 +19,4 @@ const QuestionSchema = new Schema(
 );
 
 const Question = mongoose.model('Question', QuestionSchema);
-module.exports = { Question };
+module.exports = Question;

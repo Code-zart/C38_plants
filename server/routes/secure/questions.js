@@ -1,6 +1,5 @@
-const router = require('express').Router({ mergeParams: true });
-
-const { Question } = require('../models/question');
+const router = require('express').Router({ mergeParams: true }),
+  Question = require('../models/question');
 
 /**
  * POST a new question
@@ -12,17 +11,6 @@ router.post('/', (req, res) => {
     .then((question) => res.status(201).json(question))
     .catch((err) => res.status(500).json('Error: ', err));
 });
-
-/**
- * GET all questions
- */
-router.get('/', (req, res) => {
-  Question.find().then((questions) =>
-    res.json(questions).catch((err) => res.status(500).json('Error: ', err))
-  );
-});
-
-// Get a specific question
 
 /**
  * UPDATE a specific question

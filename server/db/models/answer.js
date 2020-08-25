@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const { User } = require('../models/user');
-const { Question } = require('../models/question');
+const User = require('../models/user');
+const Question = require('../models/question');
 
 const AnswerSchema = new Schema(
   {
@@ -23,4 +23,4 @@ const AnswerSchema = new Schema(
 );
 
 const Answer = mongoose.model('Answer', AnswerSchema);
-module.exports = { Answer };
+module.exports = Answer;
