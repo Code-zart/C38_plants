@@ -8,8 +8,8 @@ import Home from './pages/Home';
 import Post from './pages/Post';
 import Profile from './pages/Profile';
 import NavbarPage from './components/NavbarPage';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import FooterPage from './components/FooterPage';
 
 const App = () => {

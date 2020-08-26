@@ -33,26 +33,28 @@ class NavbarPage extends Component {
         </MDBNavbarBrand>
         <MDBNavbarToggler onClick={this.toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
-          <MDBNavbarNav left>
-            <MDBNavItem>
-              <MDBNavLink to="/">Explore</MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink to="/api/post">Posts</MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink to="/api/user/profile">Profile</MDBNavLink>
-            </MDBNavItem>
-          </MDBNavbarNav>
+          <MDBNavbarNav left></MDBNavbarNav>
           <MDBNavbarNav right>
+            <MDBNavLink
+              className="waves-effect waves-light d-flex align-items-center"
+              to="#!"
+            >
+              Sign Up
+              <MDBIcon icon="setting" className="ml-1" />
+            </MDBNavLink>
             <MDBNavItem>
               <MDBDropdown>
-                <MDBDropdownToggle nav caret>
-                  <MDBIcon icon="user" />
+                <MDBDropdownToggle className="dopdown-toggle" nav>
+                  <img
+                    src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg"
+                    className="rounded-circle z-depth-0"
+                    style={{ height: '35px', padding: 0 }}
+                    alt=""
+                  />
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default" right>
-                  <MDBDropdownItem href="/login">Log In</MDBDropdownItem>
-                  <MDBDropdownItem href="/signup">Sign Up</MDBDropdownItem>
+                  <MDBDropdownItem href="#!">My account</MDBDropdownItem>
+                  <MDBDropdownItem href="#!">Log out</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavItem>
