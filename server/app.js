@@ -7,11 +7,13 @@ const express = require('express'),
   usersRouter = require('./routes/secure/users'),
   questionsRouter = require('./routes/secure/questions'),
   answersRouter = require('./routes/secure/answers'),
-  openRouter = require('./routes/open/index');
+  openRouter = require('./routes/open/index'),
+  logger = require('morgan');
 
 const app = express();
 
 //Middleware
+app.use(logger('dev')); // log all requests to console
 app.use(express.json());
 
 // Unauthenticated routes

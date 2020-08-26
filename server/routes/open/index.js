@@ -91,4 +91,28 @@ router.get('/api/password/:token', (req, res) => {
   }
 });
 
+/**
+ * OPEN QUESTIONS/ANSWER ROUTES
+ */
+
+// Get all questions
+router.get('/', (req, res) => {
+  Question.find().then((questions) =>
+    res.json(questions).catch((err) => res.status(500).json('Error: ', err))
+  );
+});
+
+// Get a specific question
+
+// Get all answers to a specific question
+router.get('/', (req, res) => {
+  Question.findById(req.params.qId)
+    .populate('answers')
+    .exec()
+    .then((questionWithAnswers) => {
+      res.json(questionWithAnswers);
+    })
+    .catch((err) => res.status(500).json('Error: ', err));
+});
+
 module.exports = router;
