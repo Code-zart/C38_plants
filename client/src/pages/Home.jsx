@@ -1,11 +1,14 @@
 import React from 'react';
+import HomePageJumbo from '../components/HomePageJumbo';
+import HomePageCards from '../components/HomePageCards';
 
 const Home = () => {
-  return (
-    <div>
-      <h1>Home/Landing/Explore Page</h1>
-    </div>
-  );
+    return (
+        <div>
+            <HomePageJumbo />
+            <HomePageCards />
+        </div>
+    );
 };
 
 export default Home;
