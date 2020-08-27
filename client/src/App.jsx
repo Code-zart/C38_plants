@@ -1,41 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { AppContextProvider } from './context/AppContext';
 import ContextDemo from './components/ContextDemo';
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+// import ContextDemo from './components/ContextDemo';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './App.css';
+import Home from './pages/Home';
+import Post from './pages/Post';
+import Profile from './pages/Profile';
+import NavbarPage from './components/NavbarPage';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import FooterPage from './components/FooterPage';
 
 const App = () => {
-    const [serverMessage, setServerMessage] = useState('');
+  // const [serverMessage, setServerMessage] = useState('');
 
-    const fetchDemoData = () => {
-        fetch('/api/demo')
-            .then((response) => response.json())
-            .then((data) => setServerMessage(data.message));
-    };
+  // const fetchDemoData = () => {
+  //   fetch('/api/demo')
+  //     .then((response) => response.json())
+  //     .then((data) => setServerMessage(data.message));
+  // };
 
-    useEffect(fetchDemoData, []);
+  // useEffect(fetchDemoData, []);
 
-    return ( <
-        AppContextProvider >
-        <
-        div id = "demo" >
-        <
-        h3 > Hello from client / src / App.js < /h3> <
-        ContextDemo / >
-        <
-        h3 > { serverMessage } < /h3> <
-        MDBContainer >
-        <
-        MDBRow >
-        <
-        MDBCol lg = "6" > Left column < /MDBCol> <
-        MDBCol lg = "6" > Right column < /MDBCol> <
-        /MDBRow> <
-        /MDBContainer> <
-        /div> <
-        /AppContextProvider>
-    );
+  return (
+    <AppContextProvider>
+      <BrowserRouter>
+        <NavbarPage />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/api/post" component={Post} />
+          <Route exact path="/api/user/profile" component={Profile} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+        </Switch>
+        <FooterPage />
+      </BrowserRouter>
+    </AppContextProvider>
+  );
 };
 
 export default App;
