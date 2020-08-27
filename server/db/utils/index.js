@@ -1,6 +1,6 @@
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
-require('../config/');
+require('../config');
 
 const User = require('../models/user'),
   Question = require('../models/question'),
