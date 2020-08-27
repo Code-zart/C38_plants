@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppContextProvider } from './context/AppContext';
-import ContextDemo from './components/ContextDemo';
+// import ContextDemo from './components/ContextDemo';
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 // import ContextDemo from './components/ContextDemo';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
