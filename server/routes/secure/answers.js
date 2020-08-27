@@ -1,11 +1,11 @@
-const router = require('express').Router({ mergeParams: true });
-const { Question } = require('../models/question');
-const { Answer } = require('../models/answer');
+const router = require('express').Router({ mergeParams: true }),
+  Question = require('../models/question'),
+  Answer = require('../models/answer');
 
 /**
  * POST answer to a question
  */
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const newAnswer = new Answer(req.body);
   newAnswer.question = req.params.qId;
 
@@ -27,24 +27,19 @@ router.post('/', (req, res) => {
 });
 
 /**
- * GET all answers to a specific question
- */
-router.get('/', (req, res) => {
-  Question.findById(req.params.qId)
-    .populate('answers')
-    .exec()
-    .then((questionWithAnswers) => {
-      res.json(questionWithAnswers);
-    })
-    .catch((err) => res.status(500).json('Error: ', err));
-});
-
-/**
  * UPDATE a specific answer
  */
-router.put('/:aId', (req, res) => {
+router.put('/:aId', async (req, res) => {
   let id = req.id;
   let aId = req.params.answerId;
+
+  // try {
+  //   const answer = await Answer.findById(aId);
+  //   const answer.text = req.body.text;
+  //   console.log('Answer updated!');
+  // } catch (error) {
+  //   res.status(400).json('Error: ', err);
+  // }
   Answer.findById(req.params.aId)
     .then((answer) => {
       answer.text = req.body.text;

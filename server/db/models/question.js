@@ -1,7 +1,8 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const { User } = require('../models/user');
-const { Answer } = require('../models/answer');
+import mongoose from 'mongoose';
+import User from '../models/user';
+import Answer from '../models/answer';
+
+const { Schema } = mongoose;
 
 const QuestionSchema = new Schema(
   {
@@ -18,5 +19,23 @@ const QuestionSchema = new Schema(
   { timestamps: true }
 );
 
+// DO WE NEED THIS??
+// import Joi from 'joi';
+// export const validateQuestion = (question) => {
+//   const schema = {
+//     text: Joi.string().min(5).max(300).required()
+//   };
+//   return Joi.validate(question, schema);
+// };
+// messageSchema.methods.toJSON = function () {
+//   return {
+//     id: this._id,
+//     text: this.text,
+//     createdAt: this.createdAt,
+//     updatedAt: this.updatedAt,
+//     user: this.user.toJSON(),
+//   };
+// };
+
 const Question = mongoose.model('Question', QuestionSchema);
-module.exports = { Question };
+module.exports = Question;

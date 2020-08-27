@@ -4,18 +4,20 @@ const express = require('express'),
   passport = require('./middleware/authentication/'),
   cookieParser = require('cookie-parser'),
   fileUpload = require('express-fileupload'),
-  usersRouter = require('./middleware/secure-routes/users'),
-  questionsRouter = require('./db/routes/questions'),
-  answersRouter = require('./db/routes/answers');
+  usersRouter = require('./routes/secure/users'),
+  questionsRouter = require('./routes/secure/questions'),
+  answersRouter = require('./routes/secure/answers'),
+  openRouter = require('./routes/open/index'),
+  logger = require('morgan');
 
 const app = express();
 
 //Middleware
+app.use(logger('dev')); // log all requests to console
 app.use(express.json());
 
 // Unauthenticated routes
-app.use('/api/questions', questionsRouter);
-app.use('/api/questions/:qId/answers', answersRouter);
+app.use('/', openRouter);
 
 // Serve any static files
 if (process.env.NODE_ENV === 'production') {
@@ -27,6 +29,8 @@ app.use(cookieParser());
 
 // Any authentication middleware and related routing would be here.
 app.use('/api/users', usersRouter);
+app.use('api/questions', questionsRouter);
+app.use('/api/questions/:qId/answers', answersRouter); // should this be the same path as questions?
 
 // Handle React routing, return all requests to React app
 if (process.env.NODE_ENV === 'production') {
