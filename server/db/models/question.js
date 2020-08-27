@@ -1,6 +1,4 @@
 import mongoose from 'mongoose';
-import User from '../models/user';
-import Answer from '../models/answer';
 
 const { Schema } = mongoose;
 
