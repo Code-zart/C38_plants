@@ -3,7 +3,6 @@ const express = require('express'),
   path = require('path'),
   passport = require('./middleware/authentication/'),
   cookieParser = require('cookie-parser'),
-  fileUpload = require('express-fileupload'),
   usersRouter = require('./routes/secure/users'),
   questionsRouter = require('./routes/secure/questions'),
   answersRouter = require('./routes/secure/answers'),
@@ -26,6 +25,14 @@ if (process.env.NODE_ENV === 'production') {
 
 // Middleware for request.cookies object
 app.use(cookieParser());
+
+// This middleware authenticates all users as being logged in and...
+// Gives us access to the req.user object
+app.use(
+  passport.authenticate('jwt', {
+    session: false
+  })
+);
 
 // Any authentication middleware and related routing would be here.
 app.use('/api/users', usersRouter);
