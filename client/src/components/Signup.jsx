@@ -17,7 +17,7 @@ const Signup = () => {
       <MDBRow>
         <MDBCol md="8">
           <MDBCard id="logIn">
-            <MDBCardBody  className="mx-4">
+            <MDBCardBody className="mx-4">
               <div className="text-center">
                 <h3 className="purple-text mb-5">
                   <strong>Sign Up</strong>

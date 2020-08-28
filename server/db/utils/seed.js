@@ -1,9 +1,9 @@
-import faker from 'faker';
-import { join } from 'path';
-import Question from '../models/question';
-import Answer from '../models/answer';
-import User from '../models/user';
-import { deleteAllAvatars } from './utils';
+const faker = require('faker');
+const { join } = require('path');
+const Question = require('../models/question');
+const Answer = require('../models/answer');
+const User = require('../models/user');
+const { deleteAllAvatars } = require('./utils');
 
 export const seedDb = async () => {
   console.log('Seeding database...');

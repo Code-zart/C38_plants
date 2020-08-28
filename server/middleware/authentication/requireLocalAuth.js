@@ -1,4 +1,4 @@
-import passport from 'passport';
+const passport = require('passport');
 
 const requireLocalAuth = (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {

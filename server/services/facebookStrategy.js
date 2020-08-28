@@ -1,7 +1,7 @@
-import passport from 'passport';
-import { Strategy as FacebookStrategy } from 'passport-facebook';
-
-import User from '../db/models/user';
+const passport = require('passport');
+const { Strategy } = require('passport-facebook');
+const FacebookStrategy = Strategy;
+const User = require('../db/models/user');
 
 const serverUrl =
   process.env.NODE_ENV === 'production' // INVESTIGATE
