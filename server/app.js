@@ -1,15 +1,27 @@
-require('./db/config');
-const express = require('express'),
-  path = require('path'),
-  passport = require('./middleware/authentication/'),
-  cookieParser = require('cookie-parser'),
-  usersRouter = require('./routes/secure/users'),
-  questionsRouter = require('./routes/secure/questions'),
-  answersRouter = require('./routes/secure/answers'),
-  openRouter = require('./routes/open/index'),
-  logger = require('morgan');
+//import connectMongo from './db/config';
+import mongoose from 'mongoose';
+import express from 'express';
+import path from 'path';
+import passport from './middleware/authentication/index';
+import { router as usersRouter } from './routes/secure/users';
+import { router as questionsRouter } from './routes/secure/questions';
+import { router as answersRouter } from './routes/secure/answers';
+import { router as openRouter } from './routes/open/index';
+import { morgan as logger } from 'morgan';
 
 const app = express();
+
+try {
+  mongoose.connect(process.env.MONGODB_URL, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+  });
+  console.log('Connected to MongoDB');
+} catch (e) {
+  console.log(e.toString());
+}
 
 //Middleware
 app.use(logger('dev')); // log all requests to console
@@ -45,4 +57,5 @@ if (process.env.NODE_ENV === 'production') {
     response.sendFile(path.join(__dirname, '../client/build', 'index.html'));
   });
 }
-module.exports = app;
+
+export default app;

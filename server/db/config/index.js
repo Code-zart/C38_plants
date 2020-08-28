@@ -1,13 +1,17 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-try {
-  mongoose.connect(process.env.MONGODB_URL, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-  });
-  console.log('Connected to MongoDB');
-} catch (e) {
-  console.log(e.toString());
-}
+const connectMongo = async () => {
+  try {
+    mongoose.connect(process.env.MONGODB_URL, {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false
+    });
+    console.log('Connected to MongoDB');
+  } catch (e) {
+    console.log(e.toString());
+  }
+};
+
+export default connectMongo;

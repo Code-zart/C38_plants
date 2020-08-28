@@ -1,7 +1,11 @@
-const passport = require('passport'),
-  JwtStrategy = require('passport-jwt').Strategy,
-  User = require('../../db/models/user'),
-  ExtractJwt = require('passport-jwt').ExtractJwt;
+// const passport = require('passport'),
+//   JwtStrategy = require('passport-jwt').Strategy,
+//   User = require('../../db/models/user'),
+//   ExtractJwt = require('passport-jwt').ExtractJwt;
+
+import passport from 'passport';
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
+import User from '../../db/models/user';
 
 let jwtOptions = {
   jwtFromRequest: (req) => {
@@ -22,4 +26,4 @@ passport.use(
   })
 );
 
-module.exports = passport;
+export default passport;
