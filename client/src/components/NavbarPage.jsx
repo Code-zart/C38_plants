@@ -28,7 +28,7 @@ class NavbarPage extends Component {
       <MDBNavbar color="default-color" dark expand="md">
         <MDBNavbarBrand>
           <strong className="white-text">
-            <span role="img">🍇</span>GrapeVine
+            GrapeVine
           </strong>
         </MDBNavbarBrand>
         <MDBNavbarToggler onClick={this.toggleCollapse} />
