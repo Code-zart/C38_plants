@@ -1,7 +1,7 @@
-import passport from 'passport';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth2';
-
-import User from '../db/models/user';
+const passport = require('passport');
+const { Strategy } = require('passport-google-oauth2');
+const GoogleStrategy = Strategy;
+const User = require('../db/models/user');
 
 const serverUrl =
   process.env.NODE_ENV === 'production'

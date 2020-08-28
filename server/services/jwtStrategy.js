@@ -1,7 +1,7 @@
-import passport from 'passport';
-import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
-
-import User from '../db/models/user';
+const passport = require('passport');
+const { Strategy, ExtractJwt } = require('passport-jwt');
+const JwtStrategy = Strategy;
+const User = require('../db/models/user');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const secretOrKey = isProduction

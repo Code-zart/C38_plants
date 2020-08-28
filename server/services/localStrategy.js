@@ -1,10 +1,11 @@
-import passport from 'passport';
-import { Strategy as PassportLocalStrategy } from 'passport-local';
-import Joi from 'joi';
+const passport = require('passport');
+const { Strategy } = require('passport-local');
+const PassportLocalStrategy = Strategy;
 
-import User from '../db/models/user';
-import { loginSchema } from './validators';
+const Joi = require('joi');
 
+const User = require('../db/models/user');
+const { loginSchema } = require('./validators');
 const passportLogin = new PassportLocalStrategy(
   {
     usernameField: 'email',
