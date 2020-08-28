@@ -1,5 +1,5 @@
 const router = require('express').Router({ mergeParams: true }),
-  Question = require('../../db/models/question');
+  Question = require('../models/question');
 
 /**
  * POST a new question

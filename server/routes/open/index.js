@@ -1,7 +1,9 @@
 const router = require('express').Router(),
+  //   { sendWelcomeEmail, forgotPasswordEmail } = require('../../emails/'),
   jwt = require('jsonwebtoken'),
   User = require('../../db/models/user'),
-  Question = require('../../db/models/question');
+  Question = require('../../db/models/question'),
+  Answer = require('../../db/models/answer');
 
 /**
  * OPEN USER ROUTES
@@ -9,14 +11,15 @@ const router = require('express').Router(),
 
 // Create a user
 router.post('/api/users/', async (req, res) => {
-  const { email } = req.body;
+  const { name, email, password } = req.body;
   let user = await User.findOne({ email });
   if (user)
     throw new Error('an account already exists associated with that email');
   try {
     user = new User({
+      name,
       email,
-      ...req.body
+      password
     });
 
     const token = await user.generateAuthToken();
@@ -25,8 +28,7 @@ router.post('/api/users/', async (req, res) => {
       sameSite: 'Strict',
       secure: process.env.NODE_ENV !== 'production' ? false : true
     });
-    // we don't have this method
-    // sendWelcomeEmail(user.email, user.name);
+    sendWelcomeEmail(user.email, user.name);
     res.status(201).json(user);
   } catch (error) {
     res.status(401).json({ error: error.toString() });
@@ -64,8 +66,7 @@ router.get('/api/password', async (req, res) => {
         expiresIn: '10m'
       }
     );
-    // this is not defined
-    // forgotPasswordEmail(email, token);
+    forgotPasswordEmail(email, token);
     res.json({ message: 'reset password email sent' });
   } catch (error) {
     res.status(500).json({ error: error.toString() });
@@ -76,7 +77,7 @@ router.get('/api/password', async (req, res) => {
 router.get('/api/password/:token', (req, res) => {
   const { token } = req.params;
   try {
-    jwt.verify(token, process.env.JWT_SECRET, function (err) {
+    jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
       if (err) throw new Error(err.message);
     });
     res.cookie('jwt', token, {
@@ -95,7 +96,7 @@ router.get('/api/password/:token', (req, res) => {
  */
 
 // Get all questions
-router.get('/', (_, res) => {
+router.get('/', (req, res) => {
   Question.find().then((questions) =>
     res.json(questions).catch((err) => res.status(500).json('Error: ', err))
   );

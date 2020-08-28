@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import User from '../models/user';
+import Question from '../models/question';
 
 const Schema = mongoose.Schema;
 

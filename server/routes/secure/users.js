@@ -1,15 +1,16 @@
 const router = require('express').Router(),
-  cloudinary = require('cloudinary').v2;
+  cloudinary = require('cloudinary').v2,
+  User = require('../../db/models/user');
 
 /**
  * GET current user
  */
-router.get('/me', async (req, res) => res.json(req.user));
+router.get('/api/users/me', async (req, res) => res.json(req.user));
 
 /**
  * UPDATE a user
  */
-router.patch('/me', async (req, res) => {
+router.patch('/api/users/me', async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = ['name', 'email', 'password', 'avatar'];
   const isValidOperation = updates.every((update) => {
@@ -29,7 +30,7 @@ router.patch('/me', async (req, res) => {
 /**
  * LOGOUT a user
  */
-router.post('/logout', async (req, res) => {
+router.post('/api/users/logout', async (req, res) => {
   try {
     req.user.tokens = req.user.tokens.filter((token) => {
       return token.token !== req.token;
@@ -45,7 +46,7 @@ router.post('/logout', async (req, res) => {
 /**
  * LOGOUT all devices
  */
-router.post('/logoutAll', async (req, res) => {
+router.post('/api/users/logoutAll', async (req, res) => {
   try {
     req.user.tokens = [];
     await req.user.save();
@@ -59,10 +60,9 @@ router.post('/logoutAll', async (req, res) => {
 /**
  * DELETE a user
  */
-router.delete('/me', async (req, res) => {
+router.delete('/api/users/me', async (req, res) => {
   try {
     await req.user.remove();
-    // this is not defined
     sendCancellationEmail(req.user.email, req.user.name);
     res.clearCookie('jwt');
     res.json({ message: 'user deleted' });
@@ -73,7 +73,7 @@ router.delete('/me', async (req, res) => {
 // ***********************************************//
 // Upload avatar
 // ***********************************************//
-router.post('/avatar', async (req, res) => {
+router.post('/api/users/avatar', async (req, res) => {
   try {
     const response = await cloudinary.uploader.upload(
       req.files.avatar.tempFilePath
