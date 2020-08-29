@@ -1,19 +1,24 @@
+const User = require('../../db/models/user');
+
 const router = require('express').Router(),
-  cloudinary = require('cloudinary').v2;
+  cloudinary = require('cloudinary').v2,
+  mongoose = require('mongoose');
 
 /**
- * GET current user
+ * GET current user // WORKING
  */
 router.get('/me', async (req, res) => res.json(req.user));
 
 /**
- * UPDATE a user
+ * UPDATE a user // NOT WORKING
  */
 router.patch('/me', async (req, res) => {
   const updates = Object.keys(req.body);
-  const allowedUpdates = ['name', 'email', 'password', 'avatar'];
+  console.log(updates);
+  const allowedUpdates = ['email', 'name'];
   const isValidOperation = updates.every((update) => {
     allowedUpdates.includes(update);
+    console.log(isValidOperation);
   });
   if (!isValidOperation)
     return res.status(400).send({ error: 'invalid updates!' });
@@ -27,7 +32,7 @@ router.patch('/me', async (req, res) => {
 });
 
 /**
- * LOGOUT a user
+ * LOGOUT a user // WORKING
  */
 router.post('/logout', async (req, res) => {
   try {
@@ -57,16 +62,16 @@ router.post('/logoutAll', async (req, res) => {
 });
 
 /**
- * DELETE a user
+ * DELETE a user // WORKING
  */
 router.delete('/me', async (req, res) => {
   try {
     await req.user.remove();
     // this is not defined
-    sendCancellationEmail(req.user.email, req.user.name);
+    // sendCancellationEmail(req.user.email, req.user.name);
     res.clearCookie('jwt');
     res.json({ message: 'user deleted' });
-  } catch (error) {
+  } catch (e) {
     res.status(500).json({ error: e.toString() });
   }
 });
@@ -85,10 +90,11 @@ router.post('/avatar', async (req, res) => {
     res.status(400).json({ error: error.toString() });
   }
 });
-// ******************************
-// Update password
-// ******************************
-router.put('/api/password', async (req, res) => {
+
+/**
+ * UPDATE User Password // WORKING
+ */
+router.put('/password', async (req, res) => {
   try {
     req.user.password = req.body.password;
     await req.user.save();
