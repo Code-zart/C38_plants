@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { AppContext } from '../../context/AppContext';
+import axios from 'axios';
 import {
   Avatar,
   Button,
@@ -15,6 +16,15 @@ import LockOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
 const Login = () => {
   const [formData, setFormData] = useState(null);
   const { setCurrentUser } = useContext(AppContext);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post('/api/users/login', formData).then((res) => {});
+  };
   return (
     <StylesProvider injectFirst>
       <Container className="Container" component="main" maxWidth="xs">
@@ -36,6 +46,7 @@ const Login = () => {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={handleChange}
             />
             <TextField
               variant="outlined"
@@ -47,6 +58,7 @@ const Login = () => {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChange}
             />
 
             <Button
