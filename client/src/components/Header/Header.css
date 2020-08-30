@@ -1,0 +1,89 @@
+.header {
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  background-color: white;
+  z-index: 100;
+  top: 0;
+  box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
+}
+
+.header__left {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.header__input {
+  display: flex;
+  align-items: center;
+  background-color: #eff2f5;
+  padding: 10px;
+  height: 2.5rem;
+  margin-left: 10px;
+  margin-top: 1rem;
+  border-radius: 999px;
+}
+
+.header__input > input {
+  border: none;
+  background-color: transparent;
+  outline-width: 0;
+}
+
+.header__center {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.header__option > .MuiSvgIcon-root {
+  color: grey;
+}
+
+.header__option:hover > .MuiSvgIcon-root {
+  color: #00bcd4;
+}
+
+.header__option {
+  display: flex;
+  align-items: center;
+  padding: 10px 30px;
+  cursor: pointer;
+}
+
+.header__option:hover {
+  background-color: eff2f5;
+  display: flex;
+  border-radius: 10px;
+  align-items: center;
+  padding: 0 30px;
+  border-bottom: none;
+}
+
+.header__right {
+  display: flex;
+}
+
+.header__info {
+  display: flex;
+  align-items: center;
+}
+
+.header__info > h4 {
+  margin-left: 10px;
+  font-size: medium;
+}
+
+.MuiButton-contained {
+  height: 1.7rem;
+  padding: 13px 30px;
+  border-radius: 10px;
+  margin-top: 1rem;
+  margin-right: 2rem;
+  background-color: #b39ddb;
+}
+
+.MuiButton-contained:hover {
+  background-color: #00bcd4;
+}

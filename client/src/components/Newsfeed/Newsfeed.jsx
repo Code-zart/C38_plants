@@ -1,9 +1,14 @@
-const { ref } = require('joi');
-
 import React from 'react';
+import '.Newsfeed.css';
+
 
 const Newsfeed = () => {
-  return <div></div>;
+  return (
+    <div className="feed">
+      {/* StoryReel */}
+      {/* MessageSender */}
+    </div>
+  );
 };
 
 export default Newsfeed;
