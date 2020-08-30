@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import AppContext from '../../context/AppContext';
+import {
+  FormControl,
+  InputLabel,
+  Input,
+  FormHelperText
+} from '@material-ui/core';
 
 const LoginSignup = () => {
-  return <h1>This is the Login/Signup Page</h1>;
+  const [userExists, setUserExists] = useState(true);
+
+  return (
+    <FormControl className={userExists ? 'Login' : 'Signup'}>
+      <InputLabel htmlFor="my-input">Email address</InputLabel>
+      <Input id="my-input" aria-describedby="my-helper-text" />
+      <FormHelperText id="my-helper-text">
+        We'll never share your email.
+      </FormHelperText>
+    </FormControl>
+  );
 };
 
 export default LoginSignup;
