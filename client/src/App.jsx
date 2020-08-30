@@ -1,22 +1,22 @@
 import React from 'react';
 import './App.css';
 import { AppContextProvider } from './context/AppContext';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import AppBody from './pages/AppBody/AppBody';
-import LoginSignup from './pages/LoginSignup/LoginSignup';
-import UserProfile from './pages/UserProfile/UserProfile';
 
+import { BrowserRouter, Switch } from 'react-router-dom';
+import './App.css';
+import Header from './components/Header/Header';
+import Newsfeed from './components/Newsfeed/Newsfeed';
+import Sidebar from './components/Sidebar/Sidebar';
+        
 const App = () => {
   return (
-    <AppContextProvider>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={AppBody} />
-          <Route exact path="/login" component={LoginSignup} />
-          <Route exact path="/profile" component={UserProfile} />
-        </Switch>
-      </BrowserRouter>
-    </AppContextProvider>
+    <div className="app">
+      <Header />
+      <div className="app__body"></div>
+      <Sidebar />
+      <Newsfeed />
+      {/* Widgets */}
+    </div>
   );
 };
 

@@ -1,9 +1,11 @@
 import React from 'react';
+//import '.Newsfeed.css';
 
 const Newsfeed = () => {
   return (
-    <div>
-      <h1>Questions and Answers will render here</h1>
+    <div className="feed">
+      {/* StoryReel */}
+      {/* MessageSender */}
     </div>
   );
 };
