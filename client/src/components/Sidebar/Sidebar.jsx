@@ -2,8 +2,8 @@ const { ref } = require('joi');
 
 import React from 'react';
 
-const Newsfeed = () {
+const Sidebar = () => {
   return <div></div>;
-}
+};
 
-export default Newsfeed;
+export default Sidebar;

@@ -2,7 +2,7 @@ import React from 'react';
 import { AppContextProvider } from './context/AppContext';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Header from './components/Header';
+import Header from './components/Header/Header';
 
 const App = () => {
   // const [serverMessage, setServerMessage] = useState('');

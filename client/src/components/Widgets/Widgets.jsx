@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Widgets= () {
+const Widgets = () => {
   return <div></div>;
-}
+};
 
 export default Widgets;
