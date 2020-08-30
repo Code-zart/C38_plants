@@ -1,11 +1,11 @@
 import React from 'react';
-
 import './Newsfeed.css';
+import FilterReel from '../FilterReel/FilterReel';
 
 const Newsfeed = () => {
   return (
     <div className="feed">
-      {/* StoryReel */}
+      <FilterReel />
       {/* MessageSender */}
     </div>
   );
