@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Answer = () {
+const Widgets= () {
   return <div></div>;
 }
 
-export default Answer;
+export default Widgets;
