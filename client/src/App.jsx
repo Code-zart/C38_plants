@@ -1,8 +1,10 @@
 import React from 'react';
 import { AppContextProvider } from './context/AppContext';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
+import Newsfeed from './components/Newsfeed/Newsfeed';
+import Sidebar from './components/Sidebar/Sidebar';
 
 const App = () => {
   // const [serverMessage, setServerMessage] = useState('');
@@ -16,17 +18,15 @@ const App = () => {
   // useEffect(fetchDemoData, []);
 
   return (
-    <AppContextProvider>
-      <BrowserRouter>
-        <Switch></Switch>
-
-        <Header />
-        {/* App Body */}
-        {/* Sidebar */}
-        {/* Newsfeed */}
-        {/* Widgets */}
-      </BrowserRouter>
-    </AppContextProvider>
+      <div className="app">
+          <Header  />
+          
+        <div className="app__body"
+          //<Sidebar /> 
+          //<Newsfeed />
+         // { /* Widgets */ };
+        </div>
+     
   );
 };
 

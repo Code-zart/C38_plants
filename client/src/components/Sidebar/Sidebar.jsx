@@ -1,5 +1,3 @@
-const { ref } = require('joi');
-
 import React from 'react';
 
 const Sidebar = () => {
