@@ -25,6 +25,10 @@ const Signup = () => {
 
   const handleCreateUser = (e) => {
     e.preventDefault();
+    // if (password !== confirmPassword) {
+    //   alert('Passwords Must Match!');
+    //   return;
+    // }
     axios
       .post('/api/users', formData)
       .then((res) => {
@@ -95,6 +99,19 @@ const Signup = () => {
                   autoComplete="current-password"
                   onChange={handleChange}
                 />
+                {/* <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    name="confirmPassword"
+                    label="Confirm Password"
+                    type="password"
+                    id="confirmPassword"
+                    autoComplete="confirmPassword"
+                    onChange={handleChange}
+                  />
+                </Grid> */}
               </Grid>
             </Grid>
             <Button
