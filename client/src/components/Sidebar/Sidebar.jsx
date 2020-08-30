@@ -1,9 +1,27 @@
 import React from 'react';
-
+import './Sidebar.css';
+import SidebarRow from '../SideBarRow/SidebarRow';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import EmojiFlagsIcon from '@material-ui/icons/EmojiFlags';
+import PeopleIcon from '@material-ui/icons/People';
+import ChatIcon from '@material-ui/icons/Chat';
+import StorefrontIcon from '@material-ui/icons/Storefront';
+import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
+import ExpandMoreOutlined from '@material-ui/icons/ExpandMoreOutlined';
 const Sidebar = () => {
   return (
-    <div>
-      <h1>This is the Sidebar</h1>
+    <div className="sidebar">
+      <SidebarRow
+        src="data:image/jpeg;base64,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"
+        title="Sample User"
+      />
+      <SidebarRow Icon={LocalHospitalIcon} title="Covid" />
+      <SidebarRow Icon={EmojiFlagsIcon} title="Pages" />
+      <SidebarRow Icon={PeopleIcon} title="Friends" />
+      <SidebarRow Icon={ChatIcon} title="Messenger" />
+      <SidebarRow Icon={StorefrontIcon} title="MarketPlace" />
+      <SidebarRow Icon={VideoLibraryIcon} title="Videos" />
+      <SidebarRow Icon={ExpandMoreOutlined} title="MarketPlace" />
     </div>
   );
 };

@@ -10,13 +10,18 @@ import Sidebar from './components/Sidebar/Sidebar';
         
 const App = () => {
   return (
-    <div className="app">
-      <Header />
-      <div className="app__body"></div>
-      <Sidebar />
-      <Newsfeed />
-      {/* Widgets */}
-    </div>
+
+    <AppContextProvider>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={AppBody} />
+          <Route exact path="/login" component={LoginSignup} />
+          <Route exact path="/profile" component={UserProfile} />
+        </Switch>
+      </BrowserRouter>
+    </AppContextProvider>
+   
+
   );
 };
 
