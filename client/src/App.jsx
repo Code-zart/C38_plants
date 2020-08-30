@@ -18,15 +18,13 @@ const App = () => {
   // useEffect(fetchDemoData, []);
 
   return (
-      <div className="app">
-          <Header  />
-          
-        <div className="app__body"
-          //<Sidebar /> 
-          //<Newsfeed />
-         // { /* Widgets */ };
-        </div>
-     
+    <div className="app">
+      <Header />
+      <div className="app__body"></div>
+      <Sidebar />
+      <Newsfeed />
+      {/* Widgets */}
+    </div>
   );
 };
 
