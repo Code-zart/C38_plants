@@ -1,30 +1,29 @@
 import React from 'react';
-// import { AppContextProvider } from './context/AppContext';
-// import { BrowserRouter, Switch } from 'react-router-dom';
 import './App.css';
-import Header from './components/Header/Header';
-import Newsfeed from './components/Newsfeed/Newsfeed';
-import Sidebar from './components/Sidebar/Sidebar';
+import { AppContextProvider } from './context/AppContext';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import AppBody from './pages/AppBody/AppBody';
+import LoginSignup from './pages/LoginSignup/LoginSignup';
+import UserProfile from './pages/UserProfile/UserProfile';
 
 const App = () => {
-  // const [serverMessage, setServerMessage] = useState('');
-
-  // const fetchDemoData = () => {
-  //   fetch('/api/demo')
-  //     .then((response) => response.json())
-  //     .then((data) => setServerMessage(data.message));
-  // };
-
-  // useEffect(fetchDemoData, []);
-
   return (
-    <div className="app">
-      <Header />
-      <div className="app__body"></div>
-      <Sidebar />
-      <Newsfeed />
-      {/* Widgets */};
-    </div>
+    // <div className="app">
+    //   <Header />
+    //   <div className="app__body"></div>
+    //   <Sidebar />
+    //   <Newsfeed />
+    //   {/* Widgets */};
+    <AppContextProvider>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={AppBody} />
+          <Route exact path="/login" component={LoginSignup} />
+          <Route exact path="/profile" component={UserProfile} />
+        </Switch>
+      </BrowserRouter>
+    </AppContextProvider>
+    // </div>
   );
 };
 
