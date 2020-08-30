@@ -21,16 +21,18 @@ const Login = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('/api/users/login', formData).then((res) => {
-      sessionStorage.setItem('User', res.data);
-      setCurrentUser(res.data);
-      history.push('/');
-    });
+    axios
+      .post('/api/users/login', formData)
+      .then((res) => {
+        sessionStorage.setItem('User', res.data);
+        setCurrentUser(res.data);
+        history.push('/');
+      })
+      .catch((error) => alert('check form inputs!'));
   };
   return (
     <StylesProvider injectFirst>

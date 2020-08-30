@@ -7,7 +7,8 @@ const UserSchema = new Schema(
   {
     provider: {
       type: String,
-      required: true
+      required: true,
+      default: 'email'
     },
     username: {
       type: String,

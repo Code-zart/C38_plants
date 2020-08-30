@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import { AppContext } from '../../context/AppContext';
 import {
   Avatar,
   Button,
@@ -9,10 +12,33 @@ import {
   Container,
   Typography
 } from '@material-ui/core';
-
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 const Signup = () => {
+  const [formData, setFormData] = useState(null);
+  const { setCurrentUser } = useContext(AppContext);
+  const history = useHistory();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleCreateUser = (e) => {
+    e.preventDefault();
+    // if (password !== confirmPassword) {
+    //   alert('Passwords Must Match!');
+    //   return;
+    // }
+    axios
+      .post('/api/users', formData)
+      .then((res) => {
+        sessionStorage.setItem('User', res.data);
+        setCurrentUser(res.data);
+        history.push('/');
+      })
+      .catch((error) => alert('check form inputs!'));
+  };
+
   return (
     <StylesProvider injectFirst>
       <Container component="main" maxWidth="xs">
@@ -23,18 +49,19 @@ const Signup = () => {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <form className="" noValidate>
+          <form className="" onSubmit={handleCreateUser} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="fname"
-                  name="firstName"
+                  autoComplete="name"
+                  name="name"
                   variant="outlined"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="name"
+                  label="Full Name"
                   autoFocus
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -42,10 +69,10 @@ const Signup = () => {
                   variant="outlined"
                   required
                   fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="lname"
+                  id="username"
+                  label="Username"
+                  name="username"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -57,6 +84,7 @@ const Signup = () => {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -69,7 +97,21 @@ const Signup = () => {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  onChange={handleChange}
                 />
+                {/* <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    name="confirmPassword"
+                    label="Confirm Password"
+                    type="password"
+                    id="confirmPassword"
+                    autoComplete="confirmPassword"
+                    onChange={handleChange}
+                  />
+                </Grid> */}
               </Grid>
             </Grid>
             <Button
@@ -84,7 +126,7 @@ const Signup = () => {
             <Grid container justify="flex-end">
               <Grid item>
                 <Link href="/login" variant="body2">
-                  Already have an account? Sign in
+                  Already have an account? Log in
                 </Link>
               </Grid>
             </Grid>
