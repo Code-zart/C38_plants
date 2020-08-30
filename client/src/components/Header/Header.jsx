@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Header.css';
 import Logo from '../../images/Logo.png';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import { AppContext } from '../../context/AppContext';
+import { Avatar, StylesProvider, Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
-import { Avatar, StylesProvider } from '@material-ui/core';
 import FlagIcon from '@material-ui/icons/Flag';
 import SubscriptionsOutlinedIcon from '@material-ui/icons/SubscriptionsOutlined';
-//import AddIcon from '@material-ui/icons/Add';
-import Button from '@material-ui/core/Button';
 
 const Header = () => {
+  const { currentUser, setCurrentUser } = useContext(AppContext);
+  const history = useHistory();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (!currentUser) history.push('/login');
+    if (currentUser) {
+      axios.post('api/users/logout', currentUser).then((res) => {
+        setCurrentUser(null);
+        history.push('/login');
+      });
+    }
+  };
   return (
     <div className="header">
       <div className="header__left">
@@ -38,14 +52,8 @@ const Header = () => {
       </div>
       <StylesProvider injectFirst>
         <div className="header__right">
-          <Button
-            className="Button"
-            variant="contained"
-            onClick={() => {
-              alert('clicked');
-            }}
-          >
-            Login
+          <Button className="Button" variant="contained" onClick={handleLogin}>
+            {currentUser ? 'Logout' : 'Login'}
           </Button>
         </div>
       </StylesProvider>
