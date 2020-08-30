@@ -6,11 +6,13 @@ import Widgets from '../../components/Widgets/Widgets';
 
 const AppBody = () => {
   return (
-    <div>
+    <div className="app">
       <Header />
-      <Newsfeed />
-      <Sidebar />
-      <Widgets />
+      <div className="app__body">
+        <Sidebar />
+        <Newsfeed />
+        <Widgets />
+      </div>
     </div>
   );
 };
