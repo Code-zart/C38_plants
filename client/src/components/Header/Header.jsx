@@ -1,6 +1,6 @@
 import React from 'react';
 import './Header.css';
-//import Logo from '../Logo.png';
+import Logo from '../../images/Logo.png';
 import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
 import { Avatar, StylesProvider } from '@material-ui/core';
@@ -13,7 +13,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header__left">
-        <img src="" alt="Logo" />
+        <img className="Logo" src={Logo} alt="Logo" />
       </div>
       <div className="header__input">
         <SearchIcon />
