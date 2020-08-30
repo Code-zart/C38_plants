@@ -1,6 +1,6 @@
 import React from 'react';
-import { AppContextProvider } from './context/AppContext';
-import { BrowserRouter, Switch } from 'react-router-dom';
+// import { AppContextProvider } from './context/AppContext';
+// import { BrowserRouter, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
 import Newsfeed from './components/Newsfeed/Newsfeed';
@@ -18,15 +18,13 @@ const App = () => {
   // useEffect(fetchDemoData, []);
 
   return (
-      <div className="app">
-          <Header  />
-          
-        <div className="app__body"
-          //<Sidebar /> 
-          //<Newsfeed />
-         // { /* Widgets */ };
-        </div>
-     
+    <div className="app">
+      <Header />
+      <div className="app__body"></div>
+      <Sidebar />
+      <Newsfeed />
+      {/* Widgets */};
+    </div>
   );
 };
 
