@@ -30,7 +30,7 @@ const Signup = () => {
       .then((res) => {
         sessionStorage.setItem('User', res.data);
         setCurrentUser(res.data);
-        history.pushState('/');
+        history.push('/');
       })
       .catch((error) => alert('check form inputs!'));
   };
