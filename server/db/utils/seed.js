@@ -12,10 +12,10 @@ const seedDb = async () => {
   await Answer.deleteMany({});
 
   /**
-   * CREATE USERS - 3
+   * CREATE USERS - 5
    */
 
-  const usersPromises = [...Array(3).keys()].map((index, i) => {
+  const usersPromises = [...Array(5).keys()].map((index) => {
     const user = new User({
       provider: `email`,
       username: `user${index}`,
