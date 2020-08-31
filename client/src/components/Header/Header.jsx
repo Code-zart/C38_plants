@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import './Header.css';
+import Logo from '../../images/Logo.png';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { AppContext } from '../../context/AppContext';
@@ -26,7 +27,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header__left">
-        <img src="" alt="Logo" />
+        <img className="Logo" src={Logo} alt="Logo" />
       </div>
       <div className="header__input">
         <SearchIcon />
