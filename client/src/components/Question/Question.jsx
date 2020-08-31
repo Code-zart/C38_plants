@@ -58,6 +58,7 @@ const handleSubmit = e => {
 </div>
 
   </div>;
+>>>>>>> master
 };
 
 export default Question;
