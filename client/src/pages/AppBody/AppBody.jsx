@@ -7,7 +7,6 @@ import Widgets from '../../components/Widgets/Widgets';
 const AppBody = () => {
   return (
     <div className="app">
-      <Header />
       <div className="app__body">
         <Sidebar />
         <Newsfeed />
