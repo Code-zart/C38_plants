@@ -34,9 +34,9 @@ const seedDb = async () => {
   await Answer.deleteMany({});
   logDbInfo();
   /**
-   * CREATE USERS - 5
+   * CREATE USERS - 12
    */
-  const usersPromises = [...Array(5).keys()].map(async (_, idx) => {
+  const usersPromises = [...Array(12).keys()].map(async (_, idx) => {
     const user = new User({
       provider: `email`,
       username: `user${idx}`,
@@ -52,9 +52,9 @@ const seedDb = async () => {
   });
   const resolvedUsers = await Promise.all(usersPromises);
   /**
-   * CREATE QUESTIONS - 10
+   * CREATE QUESTIONS - 25
    */
-  for (_ of Array(10).keys()) {
+  for (_ of Array(25).keys()) {
     const user =
       resolvedUsers[Math.floor(Math.random() * resolvedUsers.length)];
     const question = new Question({
@@ -70,9 +70,9 @@ const seedDb = async () => {
     await user.save();
   }
   /**
-   * CREATE ANSWERS - 30
+   * CREATE ANSWERS - 60
    */
-  for (_ of Array(30).keys()) {
+  for (_ of Array(60).keys()) {
     const question =
       resolvedQuestions[Math.floor(Math.random() * resolvedQuestions.length)];
     const user =
