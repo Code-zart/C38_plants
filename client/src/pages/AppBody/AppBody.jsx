@@ -5,6 +5,7 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import Widgets from '../../components/Widgets/Widgets';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { Switch, Paper } from '@material-ui/core';
+import '../../pages/AppBody/AppBody.css';
 
 const AppBody = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -15,7 +16,7 @@ const AppBody = () => {
   });
   return (
     <ThemeProvider theme={theme}>
-      <Paper style={{ height: '100vh' }}>
+      <Paper id="paper">
         <div className="app">
           <Header />
           <div className="app__body">
