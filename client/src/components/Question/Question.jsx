@@ -1,5 +1,5 @@
-import { Avatar } from '@material-ui/core';
 import React, { useState } from 'react';
+import { Avatar } from '@material-ui/core';
 import './Question.css';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
@@ -12,7 +12,7 @@ const Question = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // sets to empty string after submit
+    //set's the input and image to an empty string
     setInput('');
     setImageUrl('');
   };
@@ -26,15 +26,14 @@ const Question = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             className="question__input"
-            placeholder={`What's on your mind?`}
+            placeholder={'Post a question here'}
           />
 
           <input
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
-            placeholder="image URL (Optional)"
+            placeholder="image URL {Optional}"
           />
-
           <button onClick={handleSubmit} type="submit">
             Hidden submit
           </button>

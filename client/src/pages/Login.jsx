@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { AppContext } from '../../context/AppContext';
+import { AppContext } from '../context/AppContext';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import {
@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
 
-const Login = () => {
+const Login = ({ onSubmit }) => {
   const [formData, setFormData] = useState(null);
   const { setCurrentUser } = useContext(AppContext);
   const history = useHistory();
@@ -32,7 +32,8 @@ const Login = () => {
         setCurrentUser(res.data);
         history.push('/');
       })
-      .catch((error) => alert('check form inputs!'));
+      .catch((error) => alert('check form inputs!'))
+      .finally(() => onSubmit());
   };
   return (
     <StylesProvider injectFirst>
@@ -83,11 +84,6 @@ const Login = () => {
               <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  Don't have an account? Sign Up
                 </Link>
               </Grid>
             </Grid>
