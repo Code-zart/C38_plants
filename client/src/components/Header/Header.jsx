@@ -1,22 +1,16 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import './Header.css';
 import Login from '../../pages/Login';
 import Signup from '../../pages/Signup';
 import Logo from '../../images/Logo.png';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
-import { AppContext } from '../../context/AppContext';
 import { StylesProvider, Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { session } from 'passport';
 
 const Header = () => {
-  const [formData, setFormData] = useState(null);
   const [modalContent, setModalContent] = useState(null);
 
   const AuthForm = {
