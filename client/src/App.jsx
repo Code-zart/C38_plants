@@ -11,7 +11,7 @@ import Header from './components/Header/Header';
 const App = () => {
   return (
     <AppContextProvider>
-    <Header />
+      <Header />
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={AppBody} />
