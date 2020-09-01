@@ -70,9 +70,9 @@ const seedDb = async () => {
     await user.save();
   }
   /**
-   * CREATE ANSWERS - 60
+   * CREATE ANSWERS - 70
    */
-  for (_ of Array(60).keys()) {
+  for (_ of Array(70).keys()) {
     const question =
       resolvedQuestions[Math.floor(Math.random() * resolvedQuestions.length)];
     const user =
