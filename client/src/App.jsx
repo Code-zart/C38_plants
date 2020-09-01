@@ -3,8 +3,8 @@ import './App.css';
 import { AppContextProvider } from './context/AppContext';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import AppBody from './pages/AppBody/AppBody';
-import Login from './pages/Login/Login';
-import Signup from './pages/Signup/Signup';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 import UserProfile from './pages/UserProfile/UserProfile';
 
 const App = () => {

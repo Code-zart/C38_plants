@@ -20,7 +20,7 @@ const Question = () => {
   return (
     <div className="question">
       <div className="question__top">
-        <Avatar src={} alt="UserImage" />
+        <Avatar />
         <form>
           <input
             value={input}
