@@ -1,12 +1,9 @@
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
-
 require('../config');
-
 const User = require('../models/user'),
   Question = require('../models/question'),
   Answer = require('../models/answer'),
   faker = require('faker');
-
 const seedDb = async () => {
   const logDbInfo = async () => {
     await User.countDocuments({}, function (err, count) {
@@ -19,32 +16,27 @@ const seedDb = async () => {
       console.log('Number of answers:', count);
     });
   };
-
   const userIdArray = [];
   const questionIdArray = [];
   const answerIdArray = [];
+  const resolvedQuestions = [];
   const createRandomList = (arr) => {
     arr.reduce((acc, val) => {
-      if (Math.random > 0.5) {
+      if (Math.random() > 0.5) {
         acc.push(val);
       }
       return acc;
     }, []);
   };
-
   console.log('Seeding database...');
-
   await User.deleteMany({});
   await Question.deleteMany({});
   await Answer.deleteMany({});
-
   logDbInfo();
-
   /**
    * CREATE USERS - 5
    */
-
-  const usersPromises = [...Array(5).keys()].map((idx, i) => {
+  const usersPromises = [...Array(5).keys()].map(async (_, idx) => {
     const user = new User({
       provider: `email`,
       username: `user${idx}`,
@@ -55,62 +47,49 @@ const seedDb = async () => {
       bio: faker.lorem.sentences(3)
     });
     userIdArray.push(user._id);
-    user.registerUser(user, () => {});
+    await user.save();
     return user;
   });
-
-  await Promise.all(
-    usersPromises.map(async (user) => {
-      await user.save();
-    })
-  );
-
+  const resolvedUsers = await Promise.all(usersPromises);
   /**
    * CREATE QUESTIONS - 10
    */
-  const questionPromises = [...Array(10).keys()].map((idx, i) => {
+  for (_ of Array(10).keys()) {
+    const user =
+      resolvedUsers[Math.floor(Math.random() * resolvedUsers.length)];
     const question = new Question({
       text: faker.lorem.sentences(3),
-      answers: createRandomList(answerIdArray).slice(
-        Math.floor(Math.random * 4)
-      ),
       owner: userIdArray[Math.floor(Math.random() * userIdArray.length)],
       upvotes: createRandomList(userIdArray),
       downvotes: createRandomList(userIdArray)
     });
     questionIdArray.push(question._id);
-    return question;
-  });
-
-  await Promise.all(
-    questionPromises.map(async (question) => {
-      await question.save();
-    })
-  );
-
+    resolvedQuestions.push(question);
+    await question.save();
+    user.questions = [...user.questions, question._id];
+    await user.save();
+  }
   /**
    * CREATE ANSWERS - 30
    */
-  const answerPromises = [...Array(30).keys()].map((idx, i) => {
+  for (_ of Array(30).keys()) {
+    const question =
+      resolvedQuestions[Math.floor(Math.random() * resolvedQuestions.length)];
+    const user =
+      resolvedUsers[Math.floor(Math.random() * resolvedUsers.length)];
     const answer = new Answer({
       text: faker.lorem.sentences(3),
-      question:
-        questionIdArray[Math.floor(Math.random() * questionIdArray.length)],
+      question: question._id,
       owner: userIdArray[Math.floor(Math.random() * userIdArray.length)],
       upvotes: createRandomList(userIdArray),
       downvotes: createRandomList(userIdArray)
     });
     answerIdArray.push(answer._id);
-    return answer;
-  });
-
-  await Promise.all(
-    answerPromises.map(async (answer) => {
-      await answer.save();
-    })
-  );
-
+    await answer.save();
+    question.answers = [...question.answers, answer._id];
+    user.answers = [...user.answers, answer._id];
+    await Promise.all([question.save(), user.save()]);
+  }
   logDbInfo();
 };
-
 seedDb();
