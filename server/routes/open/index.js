@@ -11,6 +11,7 @@ const router = require('express').Router(),
 router.post('/api/users/', async (req, res) => {
   const { email } = req.body;
   let user = await User.findOne({ email });
+  console.log(req.body);
   if (user)
     throw new Error('an account already exists associated with that email');
   try {
