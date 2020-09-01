@@ -11,6 +11,7 @@ const router = require('express').Router(),
 router.post('/api/users/', async (req, res) => {
   const { email } = req.body;
   let user = await User.findOne({ email });
+  console.log(req.body);
   if (user)
     throw new Error('an account already exists associated with that email');
   try {
@@ -95,7 +96,7 @@ router.get('/api/password/:token', (req, res) => {
  */
 
 // Get all questions
-router.get('/', (_, res) => {
+router.get('/questions', (_, res) => {
   Question.find().then((questions) =>
     res.json(questions).catch((err) => res.status(500).json('Error: ', err))
   );
@@ -104,7 +105,7 @@ router.get('/', (_, res) => {
 // Get a specific question
 
 // Get all answers to a specific question
-router.get('/', (req, res) => {
+router.get('/question/:qId', (req, res) => {
   Question.findById(req.params.qId)
     .populate('answers')
     .exec()

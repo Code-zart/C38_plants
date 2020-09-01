@@ -1,12 +1,11 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import { AppContext } from '../../context/AppContext';
+import { AppContext } from '../context/AppContext';
 import {
   Avatar,
   Button,
   TextField,
-  Link,
   Grid,
   StylesProvider,
   Container,
@@ -14,7 +13,7 @@ import {
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
-const Signup = () => {
+const Signup = ({ onSubmit }) => {
   const [formData, setFormData] = useState(null);
   const { setCurrentUser } = useContext(AppContext);
   const history = useHistory();
@@ -25,10 +24,6 @@ const Signup = () => {
 
   const handleCreateUser = (e) => {
     e.preventDefault();
-    // if (password !== confirmPassword) {
-    //   alert('Passwords Must Match!');
-    //   return;
-    // }
     axios
       .post('/api/users', formData)
       .then((res) => {
@@ -36,7 +31,8 @@ const Signup = () => {
         setCurrentUser(res.data);
         history.push('/');
       })
-      .catch((error) => alert('check form inputs!'));
+      .catch((error) => alert('check form inputs!'))
+      .finally(() => onSubmit());
   };
 
   return (
@@ -99,19 +95,6 @@ const Signup = () => {
                   autoComplete="current-password"
                   onChange={handleChange}
                 />
-                {/* <Grid item xs={12}>
-                  <TextField
-                    variant="outlined"
-                    required
-                    fullWidth
-                    name="confirmPassword"
-                    label="Confirm Password"
-                    type="password"
-                    id="confirmPassword"
-                    autoComplete="confirmPassword"
-                    onChange={handleChange}
-                  />
-                </Grid> */}
               </Grid>
             </Grid>
             <Button
@@ -122,14 +105,9 @@ const Signup = () => {
               className=""
               Sign
               Up
-            ></Button>
-            <Grid container justify="flex-end">
-              <Grid item>
-                <Link href="/login" variant="body2">
-                  Already have an account? Log in
-                </Link>
-              </Grid>
-            </Grid>
+            >
+              Sign up
+            </Button>
           </form>
         </div>
       </Container>
