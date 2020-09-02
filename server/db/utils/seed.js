@@ -5,6 +5,7 @@ const User = require('../models/user'),
   Answer = require('../models/answer'),
   faker = require('faker');
 const seedDb = async () => {
+  // Function to print current collections count for Users/Questions/Answers
   const logDbInfo = async () => {
     await User.countDocuments({}, function (err, count) {
       console.log('Number of users:', count);
@@ -16,18 +17,39 @@ const seedDb = async () => {
       console.log('Number of answers:', count);
     });
   };
+
+  // Define array and functions to be used to generate document fields
   const userIdArray = [];
   const questionIdArray = [];
   const answerIdArray = [];
   const resolvedQuestions = [];
-  const createRandomArray = (arr) => {
-    return arr.reduce((acc, val) => {
-      if (Math.random() > 0.5) {
-        acc = [...acc, val];
-      }
-      return acc;
-    }, []);
+  const upVoter = (acc, val) => {
+    // more upvotes
+    if (Math.random() > 0.35) {
+      acc = [...acc, val];
+    }
+    return acc;
   };
+  const downVoter = (acc, val) => {
+    // less downvotes
+    if (Math.random() > 0.65) {
+      acc = [...acc, val];
+    }
+    return acc;
+  };
+  const randomReducer = (acc, val) => {
+    // max unpredictability
+    if (Math.random() > Math.random()) {
+      acc = [...acc, val];
+    }
+    return acc;
+  };
+  const createRandomArray = (arr, func) => {
+    return arr.reduce(func, []);
+  };
+
+  // Show status of DB before and after reset
+
   console.log('Seeding database...');
   await User.deleteMany({});
   await Question.deleteMany({});
@@ -52,6 +74,7 @@ const seedDb = async () => {
     return user;
   });
   const resolvedUsers = await Promise.all(usersPromises);
+
   /**
    * CREATE QUESTIONS - 25
    */
@@ -61,16 +84,19 @@ const seedDb = async () => {
     const question = new Question({
       text: faker.lorem.sentences(3),
       owner: userIdArray[Math.floor(Math.random() * userIdArray.length)],
-      upvotes: createRandomArray(userIdArray),
-      downvotes: createRandomArray(userIdArray)
+      upvotes: createRandomArray(userIdArray, upVoter),
+      downvotes: createRandomArray(userIdArray, downVoter)
     });
     questionIdArray.push(question._id);
     resolvedQuestions.push(question);
     await question.save();
+    // Update user values for questions, qUpVotes, qDownVotes
     user.questions = [...user.questions, question._id];
-
+    user.qUpVotes = createRandomArray(questionIdArray, upVoter);
+    user.qDownVotes = createRandomArray(questionIdArray, downVoter);
     await user.save();
   }
+
   /**
    * CREATE ANSWERS - 70
    */
@@ -83,29 +109,22 @@ const seedDb = async () => {
       text: faker.lorem.sentences(3),
       question: question._id,
       owner: userIdArray[Math.floor(Math.random() * userIdArray.length)],
-      upvotes: createRandomArray(userIdArray),
-      downvotes: createRandomArray(userIdArray)
+      upvotes: createRandomArray(userIdArray, upVoter),
+      downvotes: createRandomArray(userIdArray, downVoter)
     });
     answerIdArray.push(answer._id);
     await answer.save();
+    // Update questions with child answers
     question.answers = [...question.answers, answer._id];
+    await question.save();
+    // Update users with answers, aUpVotes, aDownVotes, followers, following
     user.answers = [...user.answers, answer._id];
-
-    await Promise.all([question.save(), user.save()]);
+    user.aUpVotes = createRandomArray(answerIdArray, upVoter);
+    user.aDownVotes = createRandomArray(answerIdArray, downVoter);
+    user.followers = createRandomArray(userIdArray, randomReducer);
+    user.following = createRandomArray(userIdArray, randomReducer);
+    await user.save();
   }
-
-  // UPDATE ALL USERS W/ RANDOM VALUES FOR:
-  // Question Upvotes
-
-  // Question Downvotes
-
-  // Answer Upvotes
-
-  // Answer Downvotes
-
-  // Users following
-
-  // User followers
 
   logDbInfo();
 };
