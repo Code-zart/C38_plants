@@ -14,6 +14,11 @@ const AppBody = () => {
       type: darkMode ? 'dark' : 'light'
     }
   });
+
+  const handleDarkMode = () => {
+    setDarkMode(!darkMode);
+    // Do a PUT request to update the user's darkmode preferences
+  };
   return (
     <ThemeProvider theme={theme}>
       <Paper id="paper">
@@ -23,10 +28,7 @@ const AppBody = () => {
             <Sidebar />
             <Newsfeed />
             <Widgets />
-            <Switch
-              checked={darkMode}
-              onChange={() => setDarkMode(!darkMode)}
-            />
+            <Switch checked={darkMode} onChange={handleDarkMode} />
           </div>
         </div>
       </Paper>
