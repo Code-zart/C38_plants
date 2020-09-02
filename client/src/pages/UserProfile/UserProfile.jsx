@@ -11,13 +11,16 @@ const UserProfile = () => {
         <img
           id="coverPhoto"
           src="https://cdn.pixabay.com/photo/2020/07/08/08/06/flowers-5383054_1280.jpg"
+          alt="Not Found"
         />
       </div>
       <div id="profileCard">
         <img
           id="profileImage"
           src="https://s3.amazonaws.com/webassets.ticketmob.com/LS/images/comedians/Pepe-Billete.jpg"
+          alt="Not Found"
         />
+
         <h3 id="profileName">Pepe Billete</h3>
         <Button color="primary">Edit Profile</Button>
       </div>
