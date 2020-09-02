@@ -20,10 +20,10 @@ const seedDb = async () => {
   const questionIdArray = [];
   const answerIdArray = [];
   const resolvedQuestions = [];
-  const createRandomList = (arr) => {
-    arr.reduce((acc, val) => {
+  const createRandomArray = (arr) => {
+    return arr.reduce((acc, val) => {
       if (Math.random() > 0.5) {
-        acc.push(val);
+        acc = [...acc, val];
       }
       return acc;
     }, []);
@@ -33,6 +33,7 @@ const seedDb = async () => {
   await Question.deleteMany({});
   await Answer.deleteMany({});
   logDbInfo();
+
   /**
    * CREATE USERS - 12
    */
@@ -60,8 +61,8 @@ const seedDb = async () => {
     const question = new Question({
       text: faker.lorem.sentences(3),
       owner: userIdArray[Math.floor(Math.random() * userIdArray.length)],
-      upvotes: createRandomList(userIdArray),
-      downvotes: createRandomList(userIdArray)
+      upvotes: createRandomArray(userIdArray),
+      downvotes: createRandomArray(userIdArray)
     });
     questionIdArray.push(question._id);
     resolvedQuestions.push(question);
@@ -81,8 +82,8 @@ const seedDb = async () => {
       text: faker.lorem.sentences(3),
       question: question._id,
       owner: userIdArray[Math.floor(Math.random() * userIdArray.length)],
-      upvotes: createRandomList(userIdArray),
-      downvotes: createRandomList(userIdArray)
+      upvotes: createRandomArray(userIdArray),
+      downvotes: createRandomArray(userIdArray)
     });
     answerIdArray.push(answer._id);
     await answer.save();
@@ -90,6 +91,7 @@ const seedDb = async () => {
     user.answers = [...user.answers, answer._id];
     await Promise.all([question.save(), user.save()]);
   }
+
   logDbInfo();
 };
 seedDb();
