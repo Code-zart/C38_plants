@@ -25,14 +25,14 @@ const seedDb = async () => {
   const resolvedQuestions = [];
   const upVoter = (acc, val) => {
     // more upvotes
-    if (Math.random() > 0.35) {
+    if (Math.random() > 0.42) {
       acc = [...acc, val];
     }
     return acc;
   };
   const downVoter = (acc, val) => {
     // less downvotes
-    if (Math.random() > 0.65) {
+    if (Math.random() > 0.58) {
       acc = [...acc, val];
     }
     return acc;
@@ -93,7 +93,9 @@ const seedDb = async () => {
     // Update user values for questions, qUpVotes, qDownVotes
     user.questions = [...user.questions, question._id];
     user.qUpVotes = createRandomArray(questionIdArray, upVoter);
-    user.qDownVotes = createRandomArray(questionIdArray, downVoter);
+    user.qDownVotes = createRandomArray(questionIdArray, downVoter).filter(
+      (vote) => !user.qUpVotes.includes(vote)
+    );
     await user.save();
   }
 
@@ -120,7 +122,9 @@ const seedDb = async () => {
     // Update users with answers, aUpVotes, aDownVotes, followers, following
     user.answers = [...user.answers, answer._id];
     user.aUpVotes = createRandomArray(answerIdArray, upVoter);
-    user.aDownVotes = createRandomArray(answerIdArray, downVoter);
+    user.aDownVotes = createRandomArray(answerIdArray, downVoter).filter(
+      (vote) => !user.qUpVotes.includes(vote)
+    );
     user.followers = createRandomArray(userIdArray, randomReducer);
     user.following = createRandomArray(userIdArray, randomReducer);
     await user.save();
