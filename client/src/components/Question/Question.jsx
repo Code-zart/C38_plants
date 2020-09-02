@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Avatar } from '@material-ui/core';
 import './Question.css';
@@ -12,7 +13,9 @@ const Question = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+
     //set's the input and image to an empty string
+
     setInput('');
     setImageUrl('');
   };
@@ -34,6 +37,7 @@ const Question = () => {
             onChange={(e) => setImageUrl(e.target.value)}
             placeholder="image URL {Optional}"
           />
+
           <button onClick={handleSubmit} type="submit">
             Hidden submit
           </button>
