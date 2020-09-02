@@ -39,13 +39,13 @@ const seedDb = async () => {
    */
   const usersPromises = [...Array(12).keys()].map(async (_, idx) => {
     const user = new User({
-      provider: `email`,
       username: `user${idx}`,
       email: faker.internet.email(),
       password: faker.internet.password(),
       name: faker.name.findName(),
       avatar: faker.image.avatar(),
-      bio: faker.lorem.sentences(3)
+      bio: faker.lorem.sentences(2),
+      darkmode: false
     });
     userIdArray.push(user._id);
     await user.save();
@@ -68,6 +68,7 @@ const seedDb = async () => {
     resolvedQuestions.push(question);
     await question.save();
     user.questions = [...user.questions, question._id];
+
     await user.save();
   }
   /**
@@ -89,8 +90,22 @@ const seedDb = async () => {
     await answer.save();
     question.answers = [...question.answers, answer._id];
     user.answers = [...user.answers, answer._id];
+
     await Promise.all([question.save(), user.save()]);
   }
+
+  // UPDATE ALL USERS W/ RANDOM VALUES FOR:
+  // Question Upvotes
+
+  // Question Downvotes
+
+  // Answer Upvotes
+
+  // Answer Downvotes
+
+  // Users following
+
+  // User followers
 
   logDbInfo();
 };
