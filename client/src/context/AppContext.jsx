@@ -4,7 +4,11 @@ const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
   // global state that can be used in any component in our application
+  const [posts, setPosts] = useState([]);
+  const [search, setSearch] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
+  const [currentFilter, setCurrentFilter] = useState(null);
+  const [filteredPosts, setFilteredPosts] = useState([]);
   const user = sessionStorage.getItem('User');
   useEffect(() => {
     //incase the user refreshes & context is cleared
@@ -18,8 +22,16 @@ const AppContextProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
+        posts,
+        setPosts,
+        search,
+        setSearch,
         currentUser,
-        setCurrentUser
+        setCurrentUser,
+        currentFilter,
+        setCurrentFilter,
+        filteredPosts,
+        setFilteredPosts
       }}
     >
       {children}
