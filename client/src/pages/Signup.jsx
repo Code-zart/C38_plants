@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
 import {
-  Avatar,
   Button,
   TextField,
   Grid,
@@ -11,7 +10,8 @@ import {
   Container,
   Typography
 } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+//import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import signup from '../images/signup.png';
 
 const Signup = ({ onSubmit }) => {
   const [formData, setFormData] = useState(null);
@@ -39,10 +39,21 @@ const Signup = ({ onSubmit }) => {
     <StylesProvider injectFirst>
       <Container component="main" maxWidth="xs">
         <div className="">
-          <Avatar className="">
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
+          <div>
+            <img
+              style={{
+                display: 'block',
+                marginRight: 'auto',
+                marginLeft: 'auto',
+                marginBottom: '20px',
+                width: '180px',
+                height: '180px'
+              }}
+              src={signup}
+              alt="signup"
+            />
+          </div>
+          <Typography component="h1" variant="h5" align="center">
             Sign up
           </Typography>
           <form className="" onSubmit={handleCreateUser} noValidate>
