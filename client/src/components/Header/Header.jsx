@@ -40,6 +40,7 @@ const Header = () => {
           <div className="header__right">
             <div>
               <Button
+                id="button1"
                 className="Button"
                 variant="contained"
                 onClick={toggleLoginForm}

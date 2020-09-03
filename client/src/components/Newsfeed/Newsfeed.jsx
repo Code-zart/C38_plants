@@ -1,14 +1,12 @@
 import React from 'react';
 import './Newsfeed.css';
-import FilterReel from '../FilterReel/FilterReel';
-import Question from '../Question/Question';
+import CreateQuestion from '../CreateQuestion/CreateQuestion';
 import Post from '../Post/Post';
 
 const Newsfeed = () => {
   return (
     <div className="feed">
-      <FilterReel />
-      <Question />
+      <CreateQuestion />
 
       <Post
         // profilePic={ryan}
