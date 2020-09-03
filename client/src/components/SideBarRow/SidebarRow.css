@@ -8,11 +8,13 @@
 .sidebarRow:hover {
   background-color: grey;
   border-radius: 10px;
+  transform: scale(1.07);
 }
 
 .sidebarRow > h5 {
   margin-left: 20px;
   font-weight: 600;
+  text-shadow: 2px 2px lightgray;
 }
 
 .sidebarRow > .MuiSvgIcon-root {
