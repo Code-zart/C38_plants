@@ -6,16 +6,15 @@
 }
 
 .sidebarRow:hover {
-  background-color: lightgray;
+  background-color: grey;
   border-radius: 10px;
 }
 
-.sidebarRow > h4 {
+.sidebarRow > h5 {
   margin-left: 20px;
   font-weight: 600;
 }
 
 .sidebarRow > .MuiSvgIcon-root {
   font-size: x-large;
-  color: purple;
 }

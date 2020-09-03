@@ -4,12 +4,17 @@ const router = require('express').Router({ mergeParams: true }),
 /**
  * POST a new question
  */
-router.post('/', (req, res) => {
-  const question = new Question(req.body);
-  question
-    .save()
-    .then((question) => res.status(201).json(question))
-    .catch((err) => res.status(500).json('Error: ', err));
+router.post('/', async (req, res) => {
+  try {
+    const question = new Question({
+      text: req.body.question,
+      owner: req.user._id
+    });
+    await question.save();
+    return res.status(201).json({ message: 'question posted successfully' });
+  } catch (error) {
+    res.status(400).json({ error: error.toString() });
+  }
 });
 
 /**
