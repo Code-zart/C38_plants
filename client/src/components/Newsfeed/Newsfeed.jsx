@@ -7,24 +7,13 @@ import Post from '../Post/Post';
 import axios from 'axios';
 
 const Newsfeed = () => {
-  const { setPosts, filteredPosts, setFilteredPosts } = useContext(AppContext);
+  const { filteredQuestions } = useContext(AppContext);
 
-  useEffect(() => {
-    // get all questions
-    axios
-      .get('/questions', { WithCredentials: true })
-      .then((res) => {
-        setPosts(res.data);
-        setFilteredPosts(res.data);
-      })
-      .catch((error) => console.log('Error:', error));
-  }, [setPosts, setFilteredPosts]);
   return (
     <div className="feed">
       <FilterReel />
       <Question />
-
-      <Post posts={filteredPosts} />
+      <Post questions={filteredQuestions} />
     </div>
   );
 };

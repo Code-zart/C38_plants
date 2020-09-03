@@ -75,9 +75,10 @@ router.delete('/me', async (req, res) => {
     res.status(500).json({ error: e.toString() });
   }
 });
-// ***********************************************//
-// Upload avatar
-// ***********************************************//
+
+/**
+ * UPLOAD Avatar
+ */
 router.post('/avatar', async (req, res) => {
   try {
     const response = await cloudinary.uploader.upload(

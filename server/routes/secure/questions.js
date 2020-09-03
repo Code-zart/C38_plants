@@ -42,4 +42,7 @@ router.delete('/:id', (req, res) => {
     .catch((err) => res.status(500).json('Error: ', err));
 });
 
+/**
+ * UPLOAD Image for Question -- SEE CLOUDINARY EXAMPLE
+ */
 module.exports = router;
