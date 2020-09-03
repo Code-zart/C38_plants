@@ -1,10 +1,9 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import './Newsfeed.css';
-import { AppContext } from '../../context/AppContext';
-import FilterReel from '../FilterReel/FilterReel';
-import Question from '../Question/Question';
 import Post from '../Post/Post';
-import axios from 'axios';
+import FilterReel from '../FilterReel/FilterReel';
+import { AppContext } from '../../context/AppContext';
+import CreateQuestion from '../CreateQuestion/CreateQuestion';
 
 const Newsfeed = () => {
   const { filteredQuestions } = useContext(AppContext);
@@ -12,7 +11,7 @@ const Newsfeed = () => {
   return (
     <div className="feed">
       <FilterReel />
-      <Question />
+      <CreateQuestion />
       <Post questions={filteredQuestions} />
     </div>
   );

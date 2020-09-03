@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Avatar } from '@material-ui/core';
-import './Question.css';
+import './CreateQuestion.css';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
@@ -9,7 +9,7 @@ import axios from 'axios';
 const INITIAL_STATE = {
   question: ''
 };
-const Question = () => {
+const CreateQuestion = () => {
   const [formData, setFormData] = useState(INITIAL_STATE);
   const [imageUrl, setImageUrl] = useState('');
   const handleSubmit = (e) => {
@@ -70,4 +70,4 @@ const Question = () => {
   );
 };
 
-export default Question;
+export default CreateQuestion;
