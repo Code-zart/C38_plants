@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Header.css';
-import Login from '../../pages/Login';
-import Signup from '../../pages/Signup';
+import Login from '../Login/Login';
+import Signup from '../Signup/Signup';
 import Logo from '../../images/Logo.png';
 import { StylesProvider, Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
