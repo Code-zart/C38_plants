@@ -5,11 +5,6 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema(
   {
-    provider: {
-      type: String,
-      required: true,
-      default: 'email'
-    },
     username: {
       type: String,
       lowercase: true,
@@ -33,24 +28,18 @@ const UserSchema = new Schema(
       minlength: 6,
       maxlength: 60
     },
-    name: String,
+    name: { type: String, required: true },
     avatar: String,
-    role: { type: String, default: 'USER' },
     bio: String,
-    // google
-    googleId: {
-      type: String,
-      unique: true,
-      sparse: true
-    },
-    // fb
-    facebookId: {
-      type: String,
-      unique: true,
-      sparse: true
-    },
     questions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
     answers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Answer' }],
+    qUpVotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
+    aUpVotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Answer' }],
+    qDownVotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
+    aDownVotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Answer' }],
+    followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    darkmode: { Type: Boolean, default: false },
     tokens: [
       {
         token: {

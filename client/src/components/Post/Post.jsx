@@ -1,55 +1,53 @@
-import { Avatar } from '@material-ui/core';
-import React from 'react';
+import React, { useContext } from 'react';
+import Answer from '../Answer/Answer';
 import './Post.css';
+import { Avatar } from '@material-ui/core';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import NearMeIcon from '@material-ui/icons/NearMe';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { ExpandMoreOutlined } from '@material-ui/icons';
+import { AppContext } from '../../context/AppContext';
 
-const Post = ({ profilePic, image, username, timestamp, message }) => {
+const Post = ({ questions }) => {
+  // pass answers into "answer" component
+  const { answers } = useContext(AppContext);
+
   return (
-    <div className="post">
-      <div className="post__top">
-        <Avatar src={profilePic} className="post__avatar" />
-        <div className="post_topInfo">
-          <h3>{username}</h3>
-          <p>Timestap...</p>
-        </div>
-      </div>
+    <>
+      {questions.map((question) => (
+        <div className="post">
+          <div className="post__top">
+            {/* <Avatar src={author.avatar} className="post__avatar" />
+            <div className="post_topInfo">
+              <h3 id="question_owner">{author.username}</h3>
+            </div> */}
+          </div>
 
-      <div className="post__bottom">
-        <p>{message}</p>
-      </div>
+          <div className="post__bottom">
+            <p id="question_text">{question.text}</p>
+          </div>
 
-      <div className="post__image">
-        <img src={image} alt="" />
-      </div>
+          {/* <div className="post__image">
+            <img src={image} alt="plant" />
+          </div> */}
 
-      <div className="post__options">
-        <div className="post__option">
-          <ThumbUpIcon />
-          <p>UpVote</p>
+          <div className="post__options">
+            <div id="upvote" className="post__option">
+              <ThumbUpIcon />
+              <p>{question.upvotes.length}</p>
+            </div>
+            <div id="downvote" className="post__option">
+              <ThumbDownIcon />
+              <p>{question.downvotes.length}</p>
+            </div>
+            <div id="replybutton" className="post__option2">
+              <ChatBubbleOutlineIcon />
+              <p>Comment</p>
+              <Answer answers={answers} />
+            </div>
+          </div>
         </div>
-        <div className="post__option">
-          <ThumbDownIcon />
-          <p>DownVote</p>
-        </div>
-        <div className="post__option">
-          <ChatBubbleOutlineIcon />
-          <p>Comment</p>
-        </div>
-        <div className="post__option">
-          <NearMeIcon />
-          <p>Share</p>
-        </div>
-        <div className="post__option">
-          <AccountCircleIcon />
-          <ExpandMoreOutlined />
-        </div>
-      </div>
-    </div>
+      ))}
+    </>
   );
 };
 

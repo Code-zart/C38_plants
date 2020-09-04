@@ -1,19 +1,19 @@
 import React, { useState, useContext } from 'react';
 import './Header.css';
-import Login from '../../pages/Login';
-import Signup from '../../pages/Signup';
-import Logo from '../../images/grapevine2.png';
+import Login from '../Login/Login';
+import Signup from '../Signup/Signup';
+import Logo from '../../images/Logo.png';
 import { StylesProvider, Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import { AppContext } from '../../context/AppContext';
+import axios from 'axios';
 
 const Header = () => {
   const [modalContent, setModalContent] = useState(null);
-  const { currentUser } = useContext(AppContext);
-  console.log(currentUser);
+  const { currentUser, setCurrentUser } = useContext(AppContext);
 
   const AuthForm = {
     login: Login,
@@ -26,8 +26,16 @@ const Header = () => {
 
   const toggleLoginForm = () => handleAuthButton('login');
   const toggleSignUp = () => handleAuthButton('signUp');
-  const toggleLogout = () => handleAuthButton();
   const closeModal = () => handleAuthButton(null);
+  const toggleLogout = () => {
+    axios
+      .post('/api/users/logout', { withCredentials: true })
+      .then(() => {
+        setCurrentUser(null);
+        sessionStorage.removeItem('User');
+      })
+      .catch((error) => console.log('error:', error));
+  };
 
   return (
     <div className="header">

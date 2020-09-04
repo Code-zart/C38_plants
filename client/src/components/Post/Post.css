@@ -1,9 +1,10 @@
 .post {
   width: 100%;
-  margin-top: 15px;
-  border: 1px solid black;
+  margin-top: 3rem;
+  border: 1px solid lightgray;
   border-radius: 15px;
   box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
+  z-index: 2;
 }
 
 .post__top {
@@ -36,6 +37,10 @@
   width: 100%;
 }
 
+.post:hover {
+  transform: scale(1.07);
+}
+
 .post__options {
   padding-top: 10px;
   border-top: 1px solid black;
@@ -53,7 +58,18 @@
   padding: 10px;
   flex: 1;
 }
+.post__option2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  flex: 4;
+}
 .post__option > p {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.post__option2 > p {
   margin-left: 10px;
   margin-top: 10px;
 }

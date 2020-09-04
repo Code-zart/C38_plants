@@ -1,11 +1,22 @@
 const router = require('express').Router(),
   jwt = require('jsonwebtoken'),
   User = require('../../db/models/user'),
-  Question = require('../../db/models/question');
+  Question = require('../../db/models/question'),
+  Answer = require('../../db/models/answer');
 
 /**
  * OPEN USER ROUTES
  */
+
+// Get all users
+router.get('/api/users/', async (_, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (error) {
+    res.status(401).json({ error: error.toString() });
+  }
+});
 
 // Create a user
 router.post('/api/users/', async (req, res) => {
@@ -96,16 +107,28 @@ router.get('/api/password/:token', (req, res) => {
  */
 
 // Get all questions
-router.get('/', (_, res) => {
-  Question.find().then((questions) =>
-    res.json(questions).catch((err) => res.status(500).json('Error: ', err))
-  );
+router.get('/questions', async (_, res) => {
+  try {
+    const questions = await Question.find();
+    res.json(questions);
+  } catch (error) {
+    res.status(401).json({ error: error.toString() });
+  }
 });
 
+// Get all answers
+router.get('/answers', async (_, res) => {
+  try {
+    const answers = await Answer.find();
+    res.json(answers);
+  } catch (error) {
+    res.status(401).json({ error: error.toString() });
+  }
+});
 // Get a specific question
 
 // Get all answers to a specific question
-router.get('/', (req, res) => {
+router.get('/question/:qId', (req, res) => {
   Question.findById(req.params.qId)
     .populate('answers')
     .exec()

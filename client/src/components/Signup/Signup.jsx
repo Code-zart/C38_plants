@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import { AppContext } from '../context/AppContext';
+import { AppContext } from '../../context/AppContext';
 import {
   Button,
   TextField,
@@ -11,7 +11,7 @@ import {
   Typography
 } from '@material-ui/core';
 //import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import signup from '../images/signup.png';
+import signup from '../../images/signup.png';
 
 const Signup = ({ onSubmit }) => {
   const [formData, setFormData] = useState(null);
