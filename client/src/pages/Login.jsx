@@ -1,23 +1,19 @@
 import React, { useState, useContext } from 'react';
-import { AppContext } from '../../context/AppContext';
+import { AppContext } from '../context/AppContext';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import {
   Button,
   TextField,
-  Link,
-  Grid,
   StylesProvider,
   Container,
   Typography
 } from '@material-ui/core';
-import login from '../../images/login.png';
+import login from '../images/Logo.png';
 
 const Login = ({ onSubmit }) => {
   const [formData, setFormData] = useState(null);
   const { setCurrentUser } = useContext(AppContext);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const history = useHistory();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
