@@ -50,16 +50,15 @@ const seedDb = async () => {
 
   // Show status of DB before and after reset
 
-  console.log('Seeding database...');
   await User.deleteMany({});
   await Question.deleteMany({});
   await Answer.deleteMany({});
-  logDbInfo();
+  logDbInfo().then(console.log('Seeding database...'));
 
   /**
    * CREATE USERS - 12
    */
-  const usersPromises = [...Array(1).keys()].map(async (_, idx) => {
+  const usersPromises = [...Array(25).keys()].map(async (_, idx) => {
     const user = new User({
       username: `user${idx}`,
       email: faker.internet.email(),
@@ -78,12 +77,12 @@ const seedDb = async () => {
   /**
    * CREATE QUESTIONS - 25
    */
-  for (_ of Array(1).keys()) {
+  for (_ of Array(50).keys()) {
     const user =
       resolvedUsers[Math.floor(Math.random() * resolvedUsers.length)];
     const question = new Question({
       text: faker.lorem.sentences(3),
-      owner: userIdArray[Math.floor(Math.random() * userIdArray.length)],
+      author: userIdArray[Math.floor(Math.random() * userIdArray.length)],
       upvotes: createRandomArray(userIdArray, upVoter),
       downvotes: createRandomArray(userIdArray, downVoter)
     });
@@ -102,7 +101,7 @@ const seedDb = async () => {
   /**
    * CREATE ANSWERS - 70
    */
-  for (_ of Array(70).keys()) {
+  for (_ of Array(0).keys()) {
     const question =
       resolvedQuestions[Math.floor(Math.random() * resolvedQuestions.length)];
     const user =
@@ -110,7 +109,7 @@ const seedDb = async () => {
     const answer = new Answer({
       text: faker.lorem.sentences(3),
       question: question._id,
-      owner: userIdArray[Math.floor(Math.random() * userIdArray.length)],
+      author: userIdArray[Math.floor(Math.random() * userIdArray.length)],
       upvotes: createRandomArray(userIdArray, upVoter),
       downvotes: createRandomArray(userIdArray, downVoter)
     });

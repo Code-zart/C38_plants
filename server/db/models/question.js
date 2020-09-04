@@ -23,7 +23,7 @@ const QuestionSchema = new Schema(
     downvotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
   },
   { timestamps: true },
-  { nested: { User, Author } }
+  { nested: { User, Answer } }
 );
 QuestionSchema.plugin(require('mongoose-autopopulate'));
 const Question = mongoose.model('Question', QuestionSchema);
