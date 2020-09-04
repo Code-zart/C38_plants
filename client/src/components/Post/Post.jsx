@@ -11,19 +11,15 @@ const Post = ({ questions }) => {
   // pass answers into "answer" component
   const { answers } = useContext(AppContext);
 
-  // posts.map((post) => {
-  // const userId = post.owner;
-  // const author = users.filter((user) => user._id === userId);
-
   return (
     <>
       {questions.map((question) => (
         <div className="post">
           <div className="post__top">
-            {/* <Avatar src={author.avatar} className="post__avatar" />
+            <Avatar src={question.owner.avatar} className="post__avatar" />
             <div className="post_topInfo">
-              <h3 id="question_owner">{author.username}</h3>
-            </div> */}
+              <h3 id="question_owner">{question.owner.username}</h3>
+            </div>
           </div>
 
           <div className="post__bottom">
@@ -46,7 +42,7 @@ const Post = ({ questions }) => {
             <div id="replybutton" className="post__option2">
               <ChatBubbleOutlineIcon />
               <p>Comment</p>
-              <Answer answers={answers} />
+              <Answer answers={question.answers} />
             </div>
           </div>
         </div>

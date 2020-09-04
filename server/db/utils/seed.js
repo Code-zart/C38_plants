@@ -59,7 +59,7 @@ const seedDb = async () => {
   /**
    * CREATE USERS - 12
    */
-  const usersPromises = [...Array(12).keys()].map(async (_, idx) => {
+  const usersPromises = [...Array(1).keys()].map(async (_, idx) => {
     const user = new User({
       username: `user${idx}`,
       email: faker.internet.email(),
@@ -78,7 +78,7 @@ const seedDb = async () => {
   /**
    * CREATE QUESTIONS - 25
    */
-  for (_ of Array(25).keys()) {
+  for (_ of Array(1).keys()) {
     const user =
       resolvedUsers[Math.floor(Math.random() * resolvedUsers.length)];
     const question = new Question({

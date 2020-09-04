@@ -26,7 +26,6 @@ const AppContextProvider = ({ children }) => {
     axios
       .get('/api/users')
       .then((res) => {
-        console.log(res.data);
         setUsers(res.data);
       })
       .catch((error) => console.log('Error:', error));
@@ -35,7 +34,6 @@ const AppContextProvider = ({ children }) => {
   // get all questions
   useEffect(() => {
     axios.get('/questions').then((res) => {
-      console.log(res.data);
       setQuestions(res.data);
       setFilteredQuestions(res.data);
     });
@@ -44,7 +42,6 @@ const AppContextProvider = ({ children }) => {
   // get all answers
   useEffect(() => {
     axios.get('/answers').then((res) => {
-      console.log(res.data);
       setAnswers(res.data);
     });
   }, [setAnswers]);

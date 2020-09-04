@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose'),
+  User = require('./user'),
+  { Schema } = mongoose;
 
 const AnswerSchema = new Schema(
   {
@@ -10,16 +10,22 @@ const AnswerSchema = new Schema(
       ref: 'Question',
       required: true
     },
-    owner: {
+    author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true
+      required: true,
+      autopopulate: true
     },
-    upvotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-    downvotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+    upvotes: [
+      { type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: true }
+    ],
+    downvotes: [
+      { type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: true }
+    ]
   },
-  { timestamps: true }
+  { timestamps: true },
+  { nested: User }
 );
-
+AnswerSchema.plugin(require('mongoose-autopopulate'));
 const Answer = mongoose.model('Answer', AnswerSchema);
 module.exports = Answer;
