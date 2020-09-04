@@ -1,20 +1,15 @@
 .header {
-  padding: 15px 20px;
+  padding: 10px 50px;
   display: flex;
   justify-content: space-between;
   z-index: 100;
   top: 0;
   box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
 }
-
-.Logo {
-  height: 50px;
-  margin-top: 15px;
-}
-
-.header__left {
-  display: flex;
-  justify-content: space-evenly;
+.header__left > img {
+  height: 230px;
+  width: 250px;
+  margin: -60px;
 }
 
 .header__input {
@@ -25,7 +20,7 @@
   height: 2.5rem;
   width: 55%;
   margin-left: 10px;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   border-radius: 999px;
 }
 
@@ -53,6 +48,8 @@
 
 .header__right {
   display: flex;
+  margin-top: 0rem;
+  padding: 10px 10px;
 }
 
 .MuiButton-contained {

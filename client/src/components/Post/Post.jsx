@@ -11,10 +11,6 @@ const Post = ({ questions }) => {
   // pass answers into "answer" component
   const { answers } = useContext(AppContext);
 
-  // posts.map((post) => {
-  // const userId = post.owner;
-  // const author = users.filter((user) => user._id === userId);
-
   return (
     <>
       {questions.map((question) => (
