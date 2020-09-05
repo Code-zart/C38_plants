@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
   console.log(req.body);
   try {
     const question = new Question({
-      text: req.body.text,
+      text: req.body.question,
       author: req.user._id
     });
     await question.save();

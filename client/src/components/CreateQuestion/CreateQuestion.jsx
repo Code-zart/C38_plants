@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AppContext } from '../../context/AppContext';
 import { Avatar } from '@material-ui/core';
 import './CreateQuestion.css';
 import VideocamIcon from '@material-ui/icons/Videocam';
@@ -7,7 +8,9 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import axios from 'axios';
 
 const CreateQuestion = () => {
-  const [formData, setFormData] = useState('');
+  const INITIAL_STATE = { question: '' };
+  const { questions, setQuestions } = useContext(AppContext);
+  const [formData, setFormData] = useState(INITIAL_STATE);
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -15,8 +18,8 @@ const CreateQuestion = () => {
       .then((res) => {
         console.log(res.data);
       });
-    //set's the input and image to an empty string
-    setFormData('');
+    setQuestions({ ...questions, formData });
+    setFormData(INITIAL_STATE);
   };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,7 +30,7 @@ const CreateQuestion = () => {
         <Avatar />
         <form onSubmit={handleSubmit}>
           <input
-            // value={formData.question}
+            value={formData.question}
             id="question"
             label="question"
             name="question"
@@ -37,7 +40,7 @@ const CreateQuestion = () => {
             className="question__input"
             placeholder={'Post a question here'}
           />
-          <button type="submit">Post</button>
+          <button type="submit">Hidden submit</button>
         </form>
       </div>
 
