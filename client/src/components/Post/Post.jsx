@@ -16,9 +16,9 @@ const Post = ({ questions }) => {
       {questions.map((question) => (
         <div className="post">
           <div className="post__top">
-            <Avatar src={question.owner.avatar} className="post__avatar" />
+            <Avatar src={question.author.avatar} className="post__avatar" />
             <div className="post_topInfo">
-              <h3 id="question_owner">{question.owner.username}</h3>
+              <h3 id="question_author">{question.author.username}</h3>
             </div>
           </div>
 

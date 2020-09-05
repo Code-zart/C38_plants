@@ -2,13 +2,14 @@ const router = require('express').Router({ mergeParams: true }),
   Question = require('../../db/models/question');
 
 /**
- * POST a new question
+ * POST a new question // WORKING
  */
 router.post('/', async (req, res) => {
+  console.log(req.body);
   try {
     const question = new Question({
-      text: req.body.question,
-      owner: req.user._id
+      text: req.body.text,
+      author: req.user._id
     });
     await question.save();
     return res.status(201).json({ message: 'question posted successfully' });

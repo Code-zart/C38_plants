@@ -58,77 +58,95 @@ const seedDb = async () => {
   /**
    * CREATE USERS - 12
    */
-  const usersPromises = [...Array(25).keys()].map(async (_, idx) => {
+  const usersPromises = [...Array(10).keys()].map(async (_, idx) => {
     const user = new User({
       username: `user${idx}`,
       email: faker.internet.email(),
       password: faker.internet.password(),
       name: faker.name.findName(),
       avatar: faker.image.avatar(),
-      bio: faker.lorem.sentences(2),
-      darkmode: false
+      bio: faker.lorem.sentences(2)
     });
     userIdArray.push(user._id);
+
     await user.save();
     return user;
   });
   const resolvedUsers = await Promise.all(usersPromises);
-
+  console.log(userIdArray);
   /**
    * CREATE QUESTIONS - 25
    */
-  for (_ of Array(50).keys()) {
+
+  // const questionPromises = [...Array(25).keys()].map(async () )
+  for (_ of Array(20).keys()) {
     const user =
       resolvedUsers[Math.floor(Math.random() * resolvedUsers.length)];
     const question = new Question({
       text: faker.lorem.sentences(3),
-      author: userIdArray[Math.floor(Math.random() * userIdArray.length)],
-      upvotes: createRandomArray(userIdArray, upVoter),
-      downvotes: createRandomArray(userIdArray, downVoter)
+      author: userIdArray[Math.floor(Math.random() * userIdArray.length)]
+      // upvotes: createRandomArray(userIdArray, upVoter),
+      // downvotes: createRandomArray(userIdArray, downVoter)
     });
+    console.log(question._id);
     questionIdArray.push(question._id);
     resolvedQuestions.push(question);
     await question.save();
     // Update user values for questions, qUpVotes, qDownVotes
     user.questions = [...user.questions, question._id];
-    user.qUpVotes = createRandomArray(questionIdArray, upVoter);
-    user.qDownVotes = createRandomArray(questionIdArray, downVoter).filter(
-      (vote) => !user.qUpVotes.includes(vote)
-    );
+    // user.qUpVotes = createRandomArray(questionIdArray, upVoter);
+    // user.qDownVotes = createRandomArray(questionIdArray, downVoter).filter(
+    //   (vote) => !user.qUpVotes.includes(vote)
+    // );
     await user.save();
   }
+  //resolvedQuestions = Promise.all[(user, question)]
 
+  //const userQuestionPromises = [resolvedUsers].map(
+  // user.question = [question.author.findAll({path: user._id})]
+  // )
   /**
    * CREATE ANSWERS - 70
    */
-  for (_ of Array(0).keys()) {
+  for (_ of Array(30).keys()) {
     const question =
       resolvedQuestions[Math.floor(Math.random() * resolvedQuestions.length)];
-    const user =
-      resolvedUsers[Math.floor(Math.random() * resolvedUsers.length)];
+    const userId = userIdArray[Math.floor(Math.random() * userIdArray.length)];
     const answer = new Answer({
       text: faker.lorem.sentences(3),
       question: question._id,
-      author: userIdArray[Math.floor(Math.random() * userIdArray.length)],
-      upvotes: createRandomArray(userIdArray, upVoter),
-      downvotes: createRandomArray(userIdArray, downVoter)
+      author: userId
+      // upvotes: createRandomArray(userIdArray, upVoter),
+      // downvotes: createRandomArray(userIdArray, downVoter)
     });
+
+    console.log('the answer is:', answer._id);
     answerIdArray.push(answer._id);
     await answer.save();
     // Update questions with child answers
     question.answers = [...question.answers, answer._id];
+    console.log('the question is:', answer.question);
     await question.save();
     // Update users with answers, aUpVotes, aDownVotes, followers, following
-    user.answers = [...user.answers, answer._id];
-    user.aUpVotes = createRandomArray(answerIdArray, upVoter);
-    user.aDownVotes = createRandomArray(answerIdArray, downVoter).filter(
-      (vote) => !user.qUpVotes.includes(vote)
-    );
-    user.followers = createRandomArray(userIdArray, randomReducer);
-    user.following = createRandomArray(userIdArray, randomReducer);
-    await user.save();
+    // author.answers = [...author.answers, answer._id];
+    console.log('the author is:', answer.author);
+    // author.aUpVotes = createRandomArray(answerIdArray, upVoter);
+    // author.aDownVotes = createRandomArray(answerIdArray, downVoter).filter(
+    //   (vote) => !author.qUpVotes.includes(vote)
+    // );
+    // author.followers = createRandomArray(userIdArray, randomReducer);
+    // author.following = createRandomArray(userIdArray, randomReducer);
+    // await author.save();
   }
 
   logDbInfo();
 };
 seedDb();
+
+/**
+ * First, create all users/questions/answers with only required fields populated.
+ *
+ * Then, populate users with questions, answers, upvotes, downvotes (etc.)
+ *
+ * Associate question to user, answer to question, and user (different that original) to answer
+ */

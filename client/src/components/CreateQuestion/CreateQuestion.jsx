@@ -6,12 +6,8 @@ import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import axios from 'axios';
 
-const INITIAL_STATE = {
-  question: ''
-};
 const CreateQuestion = () => {
-  const [formData, setFormData] = useState(INITIAL_STATE);
-  const [imageUrl, setImageUrl] = useState('');
+  const [formData, setFormData] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -20,7 +16,7 @@ const CreateQuestion = () => {
         console.log(res.data);
       });
     //set's the input and image to an empty string
-    setFormData(INITIAL_STATE);
+    setFormData('');
   };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -31,7 +27,7 @@ const CreateQuestion = () => {
         <Avatar />
         <form onSubmit={handleSubmit}>
           <input
-            value={formData.question}
+            // value={formData.question}
             id="question"
             label="question"
             name="question"
@@ -41,12 +37,7 @@ const CreateQuestion = () => {
             className="question__input"
             placeholder={'Post a question here'}
           />
-          <input
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-            placeholder="image URL {Optional}"
-          />
-          <button type="submit">Hidden submit</button>
+          <button type="submit">Post</button>
         </form>
       </div>
 

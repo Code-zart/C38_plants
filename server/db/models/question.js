@@ -1,3 +1,5 @@
+const { string } = require('joi');
+
 const mongoose = require('mongoose'),
   Answer = require('./answer'),
   User = require('./user'),
@@ -17,11 +19,13 @@ const QuestionSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
-      autopopulate: true
+      autopopulate: { select: 'username' }
     },
     upvotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-    downvotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+    downvotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    image: String
   },
+
   { timestamps: true },
   { nested: { User, Answer } }
 );

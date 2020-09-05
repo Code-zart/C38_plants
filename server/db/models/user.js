@@ -1,3 +1,5 @@
+const { default: mongooseAutoPopulate } = require('mongoose-autopopulate');
+
 const mongoose = require('mongoose'),
   bcrypt = require('bcryptjs'),
   jwt = require('jsonwebtoken'),
@@ -30,29 +32,29 @@ const UserSchema = new Schema(
       minlength: 6,
       maxlength: 60
     },
-    name: { type: String, required: true },
+    name: String,
     avatar: String,
     bio: String,
     questions: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Question',
-        autopopulate: true
+        autopopulate: { select: 'text' }
       }
     ],
     answers: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Answer',
-        autopopulate: true
+        autopopulate: { select: 'text' }
       }
     ],
-    followers: [
-      { type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: true }
-    ],
-    following: [
-      { type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: true }
-    ],
+    // followers: [
+    //   { type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: true }
+    // ],
+    // following: [
+    //   { type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: true }
+    // ],
     qUpVotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
     aUpVotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Answer' }],
     qDownVotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
