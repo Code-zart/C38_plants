@@ -46,7 +46,7 @@ const seedDb = async () => {
    */
   const usersPromises = [...Array(35).keys()].map(async (_, idx) => {
     const user = new User({
-      username: `user${idx}`,
+      username: faker.internet.userName(),
       email: faker.internet.email(),
       password: faker.internet.password(),
       name: faker.name.findName(),
@@ -70,6 +70,9 @@ const seedDb = async () => {
   const questionPromises = [...Array(80).keys()].map(async () => {
     const question = new Question({
       text: faker.lorem.sentences(3),
+      image: `${faker.image.nature()}?random=${Math.round(
+        Math.random() * 10e12
+      )}`,
       author: userIdArray[Math.floor(Math.random() * userIdArray.length)]
     });
     questionIdArray.push(question._id);
