@@ -6,8 +6,43 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import { AppContext } from '../../context/AppContext';
+import Question from '../../../../server/db/models/question';
 
 const Post = ({ questions }) => {
+  const { currentUser } = useContext(AppContext);
+
+  const cannotVote = () => {
+    alert('Log in or sign up to vote!');
+  };
+
+  const isUpVoted = () => {
+    return question.upvotes.includes(currentUser._id);
+  };
+
+  const isDownVoted = () => {
+    return question.downvotes.includes(currentUser._id);
+  };
+
+  const upVote = async () => {
+    question.upvotes = [...question.upvotes, currentUser._id];
+    await question.save();
+  };
+
+  const downVote = async () => {
+    question.downvotes = [questions.downvotes, currentUser._id];
+    await question.save();
+  };
+
+  const removeUpVote = async () => {
+    question.upvotes = question.upvotes.filter((user) => !currentUser);
+    await question.save();
+  };
+
+  const removeDownVote = async () => {
+    question.downvotes = question.downvotes.filter((user) => !currentUser);
+    await question.save();
+  };
+
   return (
     <>
       {questions.map((question) => (
@@ -28,11 +63,31 @@ const Post = ({ questions }) => {
           </div>
 
           <div className="post__options">
-            <div id="upvote" className="post__option">
+            <div
+              id="upvote"
+              className="post__option"
+              onClick={() =>
+                currentUser
+                  ? isUpVoted()
+                    ? removeUpVote()
+                    : upVote()
+                  : cannotVote()
+              }
+            >
               <ThumbUpIcon />
               <p>{question.upvotes?.length}</p>
             </div>
-            <div id="downvote" className="post__option">
+            <div
+              id="downvote"
+              className="post__option"
+              onClick={() =>
+                currentUser
+                  ? isDownVoted()
+                    ? removeDownVote()
+                    : downVote()
+                  : cannotVote()
+              }
+            >
               <ThumbDownIcon />
               <p>{question.downvotes?.length}</p>
             </div>

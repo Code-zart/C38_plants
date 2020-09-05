@@ -1,5 +1,6 @@
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 require('../config');
+
 const User = require('../models/user'),
   Question = require('../models/question'),
   Answer = require('../models/answer'),
@@ -9,7 +10,7 @@ const userIdArray = [];
 const questionIdArray = [];
 const answerIdArray = [];
 const handler = (determinant) => () => {
-  return Math.random() > determinant || Math.random();
+  if (Math.random() > (determinant || Math.random())) return true;
 };
 
 const createRandomArray = (arr, determinant) => {
@@ -42,8 +43,9 @@ const seedDb = async () => {
   });
 
   /**
-   * CREATE USERS - 12
+   * CREATE USERS - 35
    */
+
   const usersPromises = [...Array(35).keys()].map(async (_, idx) => {
     const user = new User({
       username: faker.internet.userName(),
@@ -64,7 +66,7 @@ const seedDb = async () => {
   console.log('Example of a User:', resolvedUsers[0]);
 
   /**
-   * CREATE QUESTIONS - 25
+   * CREATE QUESTIONS - 80
    */
 
   const questionPromises = [...Array(80).keys()].map(async () => {
@@ -83,11 +85,11 @@ const seedDb = async () => {
   const resolvedQuestions = await Promise.all(questionPromises);
   await Question.countDocuments({}, function (err, count) {
     console.log('Number of questions:', count);
-    console.log('Example of a Question:', resolvedQuestions[0]);
   });
+  console.log('Example of a Question:', resolvedQuestions[0]);
 
   /**
-   * CREATE ANSWERS - 70
+   * CREATE ANSWERS - 200
    */
 
   const answerPromises = [...Array(200).keys()].map(async () => {
@@ -105,12 +107,44 @@ const seedDb = async () => {
   const resolvedAnswers = await Promise.all(answerPromises);
   await Answer.countDocuments({}, function (err, count) {
     console.log('Number of answers:', count);
-    console.log('Example of an Answer:', resolvedAnswers[0]);
   });
-
-  // populateUserFields();
+  console.log('Example of an Answer:', resolvedAnswers[0]);
 };
 seedDb();
+
+/**
+ * Populate Questions
+ */
+
+// const populateQuestionPromises = questionPromises.map(async (question) => {
+//   question.answers = createRandomArray(answerIdArray).slice(
+//     0,
+//     Math.round(Math.random * 10)
+//   );
+//   // await question.save();
+//   return question;
+// });
+
+// const populatedQuestions = await Promise.all(populateQuestionPromises);
+
+// console.log('Example of a populated Question:', populatedQuestions[0]);
+// = async () => {
+//   for (question in resolvedQuestions) {
+// let x = 1;
+// question.answers = createRandomArray(answerIdArray).slice(
+//   0,
+//   Math.round(Math.random * 10)
+// );
+//     x++;
+//     console.log(`question ${x} populated.`);
+//   }
+//   console.log(
+//     'nested answers of random question',
+//     resolvedQuestions[0].answers
+//   );
+// };
+// populateQuestions();
+
 /**
  * First, create all users/questions/answers with only required fields populated. -- DONE
  *
