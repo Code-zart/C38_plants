@@ -51,13 +51,15 @@ const CreateQuestion = () => {
         </div>
 
         <div className="question__option">
-          <PhotoLibraryIcon style={{ color: 'green' }} />
-          <h3>Photo/Video</h3>
-        </div>
-
-        <div className="question__option">
           <InsertEmoticonIcon style={{ color: 'orange' }} />
           <h3>Feeling/Activity</h3>
+        </div>
+        <div className="question__option">
+          <PhotoLibraryIcon style={{ color: 'green' }} />
+          <form>
+            <input type="file"></input>
+            <button type="submit">Submit</button>
+          </form>
         </div>
       </div>
     </div>
