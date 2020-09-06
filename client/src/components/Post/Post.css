@@ -1,79 +1,92 @@
 .post {
-  width: 100%;
-  margin-top: 3rem;
-  border: 1px solid lightgray;
-  border-radius: 15px;
-  box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
-  z-index: 2;
+    width: 100%;
+    margin-top: 3rem;
+    color: aliceblue;
+    background-color: #16161a;
+    /* border: 1px solid lightgray; */
+    border-radius: 15px;
+    box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
+    z-index: 2;
 }
 
 .post__top {
-  display: flex;
-  position: relative;
-  align-items: center;
-  padding: 15px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    padding: 15px;
 }
 
 .post__avatar {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 
-.post__topInfo > h3 {
-  font-size: medium;
+.post__topInfo>h3 {
+    font-size: medium;
 }
 
-.post__topInfo > p {
-  font-size: small;
-  color: grey;
+.post__topInfo>p {
+    font-size: small;
+    color: white;
 }
 
 .post__bottom {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 15px 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 15px 25px;
 }
 
-.post__image > img {
-  width: 100%;
+.post__image>img {
+    width: 100%;
 }
 
 .post:hover {
-  transform: scale(1.07);
+    transform: scale(1.07);
 }
 
 .post__options {
-  padding-top: 10px;
-  border-top: 1px solid black;
-  display: flex;
-  justify-content: space-evenly;
-  font-size: medium;
+    padding-top: 10px;
+    background-color: #94a1b2;
+    /* border-top: 1px solid lightgray; */
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: medium;
+    cursor: pointer;
+    padding: 15px;
+    color: black;
+}
 
-  cursor: pointer;
-  padding: 15px;
-}
 .post__option {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    flex: 1;
 }
+
 .post__option2 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  flex: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    flex: 4;
+    color: black;
 }
-.post__option > p {
-  margin-left: 10px;
-  margin-top: 10px;
+
+.post__option>p {
+    margin-left: 10px;
+    margin-top: 10px;
+    color: black;
 }
-.post__option2 > p {
-  margin-left: 10px;
-  margin-top: 10px;
+
+.post__option2>p {
+    margin-left: 10px;
+    margin-top: 10px;
+    color: black;
 }
+
 .post__option:hover {
-  background-color: whitesmoke;
-  border-radius: 10px;
+    background-color: white;
+    border-radius: 10px;
 }

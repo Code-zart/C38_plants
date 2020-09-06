@@ -11,7 +11,7 @@ const INITIAL_STATE = {
 };
 const CreateQuestion = () => {
   const [formData, setFormData] = useState(INITIAL_STATE);
-  const [imageUrl, setImageUrl] = useState('');
+  // const [imageUrl, setImageUrl] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -39,13 +39,13 @@ const CreateQuestion = () => {
             autoFocus
             onChange={handleChange}
             className="question__input"
-            placeholder={'Post a question here'}
+            placeholder={'Post a question'}
           />
-          <input
+          {/* <input
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
             placeholder="image URL {Optional}"
-          />
+          /> */}
           <button type="submit">Hidden submit</button>
         </form>
       </div>
