@@ -16,7 +16,6 @@
     "express-fileupload": "^1.2.0",
     "express-list-endpoints": "^5.0.0",
     "faker": "^5.0.0",
-    "joi": "^17.2.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.5.8",
     "mongoose": "^5.10.0",

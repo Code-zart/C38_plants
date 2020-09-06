@@ -1,9 +1,8 @@
-const { string } = require('joi');
-
 const mongoose = require('mongoose'),
-  Answer = require('./answer'),
-  User = require('./user'),
-  { Schema } = mongoose;
+  { categories } = require('../api/words');
+(Answer = require('./answer')),
+  (User = require('./user')),
+  ({ Schema } = mongoose);
 
 const QuestionSchema = new Schema(
   {
@@ -15,6 +14,7 @@ const QuestionSchema = new Schema(
         autopopulate: true
       }
     ],
+    categories: { type: String, enum: categories, max: 3 },
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
@@ -23,6 +23,7 @@ const QuestionSchema = new Schema(
     },
     upvotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     downvotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+
     image: String
   },
 

@@ -41,6 +41,7 @@ const CreateQuestion = () => {
             className="question__input"
             placeholder={'Post a question'}
           />
+
           <select onChange={handleChange} name="category">
             <option value="indoor_plants">" 🎍 Indoor Plants"</option>
             <option value="outdoor_plants">" 🌴 Outdoor Plants"</option>
@@ -51,6 +52,7 @@ const CreateQuestion = () => {
             <option value="garden">" 💐 Garden"</option>
             <option value="problems">" 🥀 Problems"</option>
           </select>
+
           <button type="submit">Hidden submit</button>
         </form>
       </div>
