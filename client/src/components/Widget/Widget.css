@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico|Roboto+Slab:400,300');
+
+.heading {
+  font-family: 'Pacifico' serif;
+  font-size: 180px;
+  margin-bottom: 0;
+}
+
+.funFact {
+  padding: 25px 10px;
+  position: sticky;
+}
+
+.MuiButton-contained {
+  width: 160px;
+  height: 50px;
+  font-size: 1.1em;
+  border-radius: 25px;
+  background-color: #2cb67d;
+}
