@@ -12,14 +12,17 @@ const Sidebar = () => {
           title="Rick Sanchez "
         />
       </Link>
-      <SidebarRow title=" 🎍 Indoor Plants" />
-      <SidebarRow title=" 🌴 Outdoor Plants" />
-      <SidebarRow title=" 🌵 Cacti" />
-      <SidebarRow title=" 🥕 Vegetables" />
-      <SidebarRow title=" 🌲 Fruit trees" />
-      <SidebarRow title=" 🌿 Herbs" />
-      <SidebarRow title=" 💐 Garden" />
-      <SidebarRow title=" 🥀 Problems" />
+      <h4>
+        filterBy: 
+      </h4>
+      <SidebarRow category="indoor_plants" title=" 🎍 Indoor Plants" />
+      <SidebarRow category="outdoor_plants" title=" 🌴 Outdoor Plants" />
+      <SidebarRow category="cacti" title=" 🌵 Cacti" />
+      <SidebarRow category="vegetables" title=" 🥕 Vegetables" />
+      <SidebarRow category="fruit_trees" title=" 🌲 Fruit trees" />
+      <SidebarRow category="herbs" title=" 🌿 Herbs" />
+      <SidebarRow category="garden" title=" 💐 Garden" />
+      <SidebarRow category="problems" title=" 🥀 Problems" />
     </div>
   );
 };

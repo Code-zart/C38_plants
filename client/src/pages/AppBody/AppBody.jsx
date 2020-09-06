@@ -5,6 +5,7 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import Widgets from '../../components/Widget/Widget';
 import '../../pages/AppBody/AppBody.css';
 
+
 const AppBody = () => {
   return (
     <div className="app">
