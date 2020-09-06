@@ -38,6 +38,28 @@ router.put('/:id', (req, res) => {
 });
 
 /**
+ * UPVOTE a specific question
+ */
+// router.put('/:id', async (req, res) => {
+// try {
+//   const question = await Question.findById(req.id);
+//   const user =
+//   question.upvotes = [...question.upvotes, user._id];
+// } catch (error) {
+
+//   // }
+
+//     .then((question) => {
+//       question.text = req.body.text;
+
+//       question
+//         .save()
+//         .then(() => res.json('question updated!'))
+//         .catch((err) => res.status(400).json('Error: ', err));
+//     })
+//     .catch((err) => res.status(400).json('Error: ', err));
+// });
+/**
  * DELETE a specific question
  */
 router.delete('/:id', (req, res) => {

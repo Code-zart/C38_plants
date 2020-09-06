@@ -1,5 +1,6 @@
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 require('../config');
+
 const User = require('../models/user'),
   Question = require('../models/question'),
   Answer = require('../models/answer'),
@@ -9,7 +10,7 @@ const userIdArray = [];
 const questionIdArray = [];
 const answerIdArray = [];
 const handler = (determinant) => () => {
-  return Math.random() > determinant || Math.random();
+  if (Math.random() > (determinant || Math.random())) return true;
 };
 
 const createRandomArray = (arr, determinant) => {
@@ -42,8 +43,9 @@ const seedDb = async () => {
   });
 
   /**
-   * CREATE USERS - 12
+   * CREATE USERS - 35
    */
+
   const usersPromises = [...Array(35).keys()].map(async (_, idx) => {
     const user = new User({
       username: faker.internet.userName(),
@@ -64,7 +66,7 @@ const seedDb = async () => {
   console.log('Example of a User:', resolvedUsers[0]);
 
   /**
-   * CREATE QUESTIONS - 25
+   * CREATE QUESTIONS - 80
    */
 
   const questionPromises = [...Array(80).keys()].map(async () => {
@@ -73,7 +75,9 @@ const seedDb = async () => {
       image: `${faker.image.nature()}?random=${Math.round(
         Math.random() * 10e12
       )}`,
-      author: userIdArray[Math.floor(Math.random() * userIdArray.length)]
+      author: userIdArray[Math.floor(Math.random() * userIdArray.length)],
+      upvotes: createRandomArray(userIdArray, 0.4),
+      downvotes: createRandomArray(userIdArray, 0.6)
     });
     questionIdArray.push(question._id);
 
@@ -83,11 +87,11 @@ const seedDb = async () => {
   const resolvedQuestions = await Promise.all(questionPromises);
   await Question.countDocuments({}, function (err, count) {
     console.log('Number of questions:', count);
-    console.log('Example of a Question:', resolvedQuestions[0]);
   });
+  console.log('Example of a Question:', resolvedQuestions[0]);
 
   /**
-   * CREATE ANSWERS - 70
+   * CREATE ANSWERS - 200
    */
 
   const answerPromises = [...Array(200).keys()].map(async () => {
@@ -95,7 +99,9 @@ const seedDb = async () => {
       text: faker.lorem.sentences(2),
       question:
         questionIdArray[Math.floor(Math.random() * questionIdArray.length)],
-      author: userIdArray[Math.floor(Math.random() * userIdArray.length)]
+      author: userIdArray[Math.floor(Math.random() * userIdArray.length)],
+      upvotes: createRandomArray(userIdArray, 0.4),
+      downvotes: createRandomArray(userIdArray, 0.6)
     });
     answerIdArray.push(answer._id);
 
@@ -105,27 +111,7 @@ const seedDb = async () => {
   const resolvedAnswers = await Promise.all(answerPromises);
   await Answer.countDocuments({}, function (err, count) {
     console.log('Number of answers:', count);
-    console.log('Example of an Answer:', resolvedAnswers[0]);
   });
-
-  // populateUserFields();
+  console.log('Example of an Answer:', resolvedAnswers[0]);
 };
 seedDb();
-/**
- * First, create all users/questions/answers with only required fields populated. -- DONE
- *
- * Then, populate users with questions, answers, upvotes, downvotes (etc.)
- * 
- * const populaterUserFields = async () => {
-    const userFieldPromises = resolvedUsers.map(async (user) => {
-      user.questions = createRandomArray(questionIdArray);
-
-      await user.save();
-      return user;
-    });
-    const populatedUsers = await Promise.all(userFieldPromises);
-    console.log('Populated User:', populatedUsers[0]);
-  };
-  populater
- * Associate question to user, answer to question, and user (different that original) to question
- */

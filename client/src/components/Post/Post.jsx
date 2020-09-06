@@ -9,11 +9,48 @@ import { AppContext } from '../../context/AppContext';
 import axios from 'axios';
 
 const Post = ({ questions }) => {
-  const INITIAL_STATE = { answer: '' };
-  const qid = questions.id;
+  const { currentUser } = useContext(AppContext);
   const { answers, setAnswers } = useContext(AppContext);
-
+  const INITIAL_STATE = { answer: '' };
   const [formData, setFormData] = useState(INITIAL_STATE);
+  const cannotVote = () => {
+    alert('Log in or sign up to vote!');
+  };
+
+  const isUpVoted = (e) => {
+    let question = e.params.id;
+    return question.upvotes.includes(currentUser._id);
+  };
+
+  const isDownVoted = (e) => {
+    let question = e.params.id;
+    return question.downvotes.includes(currentUser._id);
+  };
+
+  const upVote = async (e) => {
+    let question = e.params.id;
+    question.upvotes = [...question.upvotes, currentUser._id];
+    await question.save();
+  };
+
+  const downVote = async (e) => {
+    let question = e.params.id;
+    question.downvotes = [questions.downvotes, currentUser._id];
+    await question.save();
+  };
+
+  const removeUpVote = async (e) => {
+    let question = e.params.id;
+    question.upvotes = question.upvotes.filter((user) => !currentUser);
+    await question.save();
+  };
+
+  const removeDownVote = async (e) => {
+    let question = e.params.id;
+    question.downvotes = question.downvotes.filter((user) => !currentUser);
+    await question.save();
+  };
+
   const handleSubmit = (e) => {
     // `/api/questions/${qid}/answers`
     e.preventDefault();
@@ -50,11 +87,31 @@ const Post = ({ questions }) => {
           </div>
 
           <div className="post__options">
-            <div id="upvote" className="post__option">
+            <div
+              id="upvote"
+              className="post__option"
+              onClick={() =>
+                currentUser
+                  ? isUpVoted()
+                    ? removeUpVote()
+                    : upVote()
+                  : cannotVote()
+              }
+            >
               <ThumbUpIcon />
               <p>{question.upvotes?.length}</p>
             </div>
-            <div id="downvote" className="post__option">
+            <div
+              id="downvote"
+              className="post__option"
+              onClick={() =>
+                currentUser
+                  ? isDownVoted()
+                    ? removeDownVote()
+                    : downVote()
+                  : cannotVote()
+              }
+            >
               <ThumbDownIcon />
               <p>{question.downvotes?.length}</p>
             </div>

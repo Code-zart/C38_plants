@@ -41,6 +41,7 @@ const CreateQuestion = () => {
             className="question__input"
             placeholder={'Post a question'}
           />
+
           <button type="submit">Hidden submit</button>
         </form>
       </div>
