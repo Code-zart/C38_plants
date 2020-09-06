@@ -38,7 +38,7 @@ const CreateQuestion = () => {
             autoFocus
             onChange={handleChange}
             className="question__input"
-            placeholder={'Post a question here'}
+            placeholder={'Post a question'}
           />
           <button type="submit">Hidden submit</button>
         </form>
