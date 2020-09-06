@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { AppContext } from '../../context/AppContext';
 import { Avatar } from '@material-ui/core';
 import './CreateQuestion.css';
-import VideocamIcon from '@material-ui/icons/Videocam';
+// import VideoCamIcon from '@material-ui/icons/VideoCam';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import axios from 'axios';
@@ -57,18 +57,20 @@ const CreateQuestion = () => {
 
       <div className="question__bottom">
         <div className="question__option">
-          <VideocamIcon style={{ color: 'red' }} />
+          {/* <VideoCamIcon style={{ color: 'red' }} /> */}
           <h3>Live Video</h3>
-        </div>
-
-        <div className="question__option">
-          <PhotoLibraryIcon style={{ color: 'green' }} />
-          <h3>Photo/Video</h3>
         </div>
 
         <div className="question__option">
           <InsertEmoticonIcon style={{ color: 'orange' }} />
           <h3>Feeling/Activity</h3>
+        </div>
+        <div className="question__option">
+          <PhotoLibraryIcon style={{ color: 'green' }} />
+          <form>
+            <input type="file"></input>
+            <button type="submit">Submit</button>
+          </form>
         </div>
       </div>
     </div>
