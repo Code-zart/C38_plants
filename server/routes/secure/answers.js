@@ -6,22 +6,19 @@ const router = require('express').Router({ mergeParams: true }),
  * POST answer to a question
  */
 router.post('/', async (req, res) => {
+  console.log('In POst Router', req.params);
   const newAnswer = new Answer(req.body);
+  console.log('newAnswer', newAnswer);
+  console.log('user', req.user);
   newAnswer.question = req.params.qId;
 
-  return Question.findById(req.params.qId)
+  Question.findById(req.params.qId)
     .then((question) => {
-      newAnswer
-        .save()
-        .then((createdAnswer) => {
-          question.answers.push(createdAnswer._id);
+      newAnswer.save().then((createdAnswer) => {
+        question.answers.push(createdAnswer._id);
 
-          question
-            .save()
-            .then(res.json(createdAnswer))
-            .catch((err) => res.status(500).json('Error: ', err));
-        })
-        .catch((err) => res.status(500).json('Error: ', err));
+        question.save().then(res.json(createdAnswer));
+      });
     })
     .catch((err) => res.status(500).json('Error: ', err));
 });

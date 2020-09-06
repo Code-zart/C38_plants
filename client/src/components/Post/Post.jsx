@@ -51,11 +51,12 @@ const Post = ({ questions }) => {
     await question.save();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, id) => {
     // `/api/questions/${qid}/answers`
+    console.log(id);
     e.preventDefault();
     axios
-      .post(`/api/questions/answers`, formData, {
+      .post(`/api/questions/${id}/answers`, formData, {
         withCredentials: true
       })
       .then((res) => {
@@ -67,6 +68,7 @@ const Post = ({ questions }) => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   return (
     <>
       {questions.map((question) => (
@@ -117,7 +119,7 @@ const Post = ({ questions }) => {
             </div>
             <div id="replybutton" className="post__option2">
               <ChatBubbleOutlineIcon />
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={(e) => handleSubmit(e, question._id)}>
                 <input
                   value={formData.answers}
                   onChange={handleChange}
