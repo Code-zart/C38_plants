@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from '../../components/Header/Header';
 import Newsfeed from '../../components/Newsfeed/Newsfeed';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import Widgets from '../../components/Widgets/Widgets';
+import Widget from '../../components/Widget/Widget';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { Switch, Paper } from '@material-ui/core';
 import '../../pages/AppBody/AppBody.css';
@@ -27,7 +27,7 @@ const AppBody = () => {
           <div className="app__body">
             <Sidebar />
             <Newsfeed />
-            <Widgets />
+            <Widget />
             <Switch checked={darkMode} onChange={handleDarkMode} />
           </div>
         </div>
