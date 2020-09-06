@@ -11,6 +11,29 @@ const AppContextProvider = ({ children }) => {
   const [currentFilter, setCurrentFilter] = useState(null);
   const [filteredQuestions, setFilteredQuestions] = useState([]);
   const user = sessionStorage.getItem('User');
+
+  const fetchQuestions = () => {
+    axios.get('/questions').then((res) => {
+      setQuestions(res.data);
+      setFilteredQuestions(res.data);
+    });
+  };
+
+  const fetchAnswers = () => {
+    axios.get('/answers').then((res) => {
+      setAnswers(res.data);
+    });
+  };
+
+  const fetchUser = () => {
+    axios
+      .get('/api/users')
+      .then((res) => {
+        setUsers(res.data);
+      })
+      .catch((error) => console.log('Error:', error));
+  };
+
   useEffect(() => {
     //incase the user refreshes & context is cleared
     if (user && !currentUser) {
@@ -21,30 +44,11 @@ const AppContextProvider = ({ children }) => {
     }
   }, [currentUser, user]);
 
-  // get all users
   useEffect(() => {
-    axios
-      .get('/api/users')
-      .then((res) => {
-        setUsers(res.data);
-      })
-      .catch((error) => console.log('Error:', error));
-  }, [setUsers]);
-
-  // get all questions
-  useEffect(() => {
-    axios.get('/questions').then((res) => {
-      setQuestions(res.data);
-      setFilteredQuestions(res.data);
-    });
-  }, [setQuestions, setFilteredQuestions]);
-
-  // get all answers
-  useEffect(() => {
-    axios.get('/answers').then((res) => {
-      setAnswers(res.data);
-    });
-  }, [setAnswers]);
+    fetchUser();
+    fetchQuestions();
+    fetchAnswers();
+  }, []);
 
   return (
     <AppContext.Provider
@@ -60,7 +64,9 @@ const AppContextProvider = ({ children }) => {
         currentFilter,
         setCurrentFilter,
         filteredQuestions,
-        setFilteredQuestions
+        setFilteredQuestions,
+        fetchQuestions,
+        fetchAnswers
       }}
     >
       {children}

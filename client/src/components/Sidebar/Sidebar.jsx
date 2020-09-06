@@ -12,9 +12,8 @@ const Sidebar = () => {
           title="Rick Sanchez "
         />
       </Link>
-      <h4>
-        filterBy: 
-      </h4>
+
+      <h4>Filter By:</h4>
       <SidebarRow category="indoor_plants" title=" 🎍 Indoor Plants" />
       <SidebarRow category="outdoor_plants" title=" 🌴 Outdoor Plants" />
       <SidebarRow category="cacti" title=" 🌵 Cacti" />

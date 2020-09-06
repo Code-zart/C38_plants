@@ -8,7 +8,6 @@ const router = require('express').Router({ mergeParams: true }),
  * POST a new question // WORKING
  */
 router.post('/', async (req, res) => {
-  console.log(req.body);
   try {
     const question = new Question({
       text: req.body.question,
@@ -40,25 +39,26 @@ router.put('/:id', (req, res) => {
 /**
  * UPVOTE a specific question
  */
-// router.put('/:id', async (req, res) => {
-// try {
-//   const question = await Question.findById(req.id);
-//   const user =
-//   question.upvotes = [...question.upvotes, user._id];
-// } catch (error) {
+router.patch('/vote/:questionId', async (req, res) => {
+  const { _id: currentUserId } = req.user;
+  const { questionId } = req.params;
+  const { upVote } = req.body;
 
-//   // }
+  const question = await Question.findById(questionId);
 
-//     .then((question) => {
-//       question.text = req.body.text;
+  const votesToModify = upVote ? question.upvotes : question.downvotes;
+  const voteIndex = votesToModify.indexOf(currentUserId);
+  const hasVoted = voteIndex !== -1;
 
-//       question
-//         .save()
-//         .then(() => res.json('question updated!'))
-//         .catch((err) => res.status(400).json('Error: ', err));
-//     })
-//     .catch((err) => res.status(400).json('Error: ', err));
-// });
+  hasVoted
+    ? votesToModify.splice(voteIndex, 1)
+    : votesToModify.push(currentUserId);
+
+  await question.save();
+
+  res.send({ question });
+});
+
 /**
  * DELETE a specific question
  */
