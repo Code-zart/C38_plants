@@ -1,5 +1,8 @@
 const router = require('express').Router({ mergeParams: true }),
-  Question = require('../../db/models/question');
+  Question = require('../../db/models/question'),
+  { cloudinary } = require('../../db/utils/cloudinary.js'),
+  express = require('express'),
+  app = express();
 
 /**
  * POST a new question // WORKING
@@ -51,4 +54,19 @@ router.delete('/:id', (req, res) => {
 /**
  * UPLOAD Image for Question -- SEE CLOUDINARY EXAMPLE
  */
+router.use(express.json({ limit: '50mb' }));
+router.use(express.urlencoded({ limit: '50mb', extended: true }));
+router.post('/api/qid/upload', async (req, res) => {
+  try {
+    const fileStr = req.body.data;
+    const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+      upload_preset: 'ml_default'
+    });
+    console.log(uploadedResponse);
+    res.json({ msg: 'success' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ err: 'try again' });
+  }
+});
 module.exports = router;

@@ -5,8 +5,6 @@ import { useHistory } from 'react-router-dom';
 import {
   Button,
   TextField,
-  Link,
-  Grid,
   StylesProvider,
   Container,
   Typography
@@ -16,7 +14,6 @@ import login from '../../images/login.png';
 const Login = ({ onSubmit }) => {
   const [formData, setFormData] = useState(null);
   const { setCurrentUser } = useContext(AppContext);
-  const [loggedIn, setLoggedIn] = useState(false);
   const history = useHistory();
 
   const handleChange = (e) => {
