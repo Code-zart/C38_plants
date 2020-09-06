@@ -3,7 +3,6 @@ import { AppContext } from '../../context/AppContext';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import {
-  Avatar,
   Button,
   TextField,
   Link,
@@ -12,11 +11,12 @@ import {
   Container,
   Typography
 } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
+import login from '../../images/login.png';
 
 const Login = ({ onSubmit }) => {
   const [formData, setFormData] = useState(null);
   const { setCurrentUser } = useContext(AppContext);
+  const [loggedIn, setLoggedIn] = useState(false);
   const history = useHistory();
 
   const handleChange = (e) => {
@@ -39,10 +39,21 @@ const Login = ({ onSubmit }) => {
     <StylesProvider injectFirst>
       <Container className="Container" component="main" maxWidth="xs">
         <div className="something">
-          <Avatar className="Avatar" variant="rounded">
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
+          <div>
+            <img
+              style={{
+                display: 'block',
+                marginRight: 'auto',
+                marginLeft: 'auto',
+                marginBottom: '20px',
+                width: '180px',
+                height: '180px'
+              }}
+              src={login}
+              alt="login"
+            />
+          </div>
+          <Typography component="h1" variant="h5" align="center">
             Log In
           </Typography>
           <form className="somethingelse" noValidate onSubmit={handleSubmit}>
@@ -80,13 +91,6 @@ const Login = ({ onSubmit }) => {
             >
               Sign In
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-            </Grid>
           </form>
         </div>
       </Container>

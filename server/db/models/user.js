@@ -1,7 +1,11 @@
+const { default: mongooseAutoPopulate } = require('mongoose-autopopulate');
+
 const mongoose = require('mongoose'),
   bcrypt = require('bcryptjs'),
-  jwt = require('jsonwebtoken');
-const { Schema } = mongoose;
+  jwt = require('jsonwebtoken'),
+  Question = require('./question'),
+  Answer = require('./answer'),
+  { Schema } = mongoose;
 
 const UserSchema = new Schema(
   {
@@ -10,7 +14,6 @@ const UserSchema = new Schema(
       lowercase: true,
       unique: true,
       required: [true, "can't be blank"],
-      match: [/^[a-zA-Z0-9_]+$/, 'is invalid'],
       index: true
     },
     email: {
@@ -28,18 +31,33 @@ const UserSchema = new Schema(
       minlength: 6,
       maxlength: 60
     },
-    name: { type: String, required: true },
+    name: String,
     avatar: String,
     bio: String,
-    questions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
-    answers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Answer' }],
+    questions: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Question',
+        autopopulate: { select: 'text' }
+      }
+    ],
+    answers: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Answer',
+        autopopulate: { select: 'text' }
+      }
+    ],
+    // followers: [
+    //   { type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: true }
+    // ],
+    // following: [
+    //   { type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: true }
+    // ],
     qUpVotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
     aUpVotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Answer' }],
     qDownVotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
     aDownVotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Answer' }],
-    followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-    following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-    darkmode: { Type: Boolean, default: false },
     tokens: [
       {
         token: {
@@ -49,7 +67,8 @@ const UserSchema = new Schema(
       }
     ]
   },
-  { timestamps: true }
+  { timestamps: true },
+  { nested: { Answer, Question } }
 );
 
 // By naming this method toJSON we don't need to call it for it to run because of our express res.send methods calls it for us.
@@ -89,6 +108,6 @@ UserSchema.pre('save', async function (next) {
   }
   next();
 });
-
+UserSchema.plugin(require('mongoose-autopopulate'));
 const User = mongoose.model('User', UserSchema);
 module.exports = User;
