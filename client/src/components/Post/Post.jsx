@@ -6,7 +6,6 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import { AppContext } from '../../context/AppContext';
-import Question from '../../../../server/db/models/question';
 
 const Post = ({ questions }) => {
   const { currentUser } = useContext(AppContext);
@@ -15,30 +14,36 @@ const Post = ({ questions }) => {
     alert('Log in or sign up to vote!');
   };
 
-  const isUpVoted = () => {
+  const isUpVoted = (e) => {
+    let question = e.params.id;
     return question.upvotes.includes(currentUser._id);
   };
 
-  const isDownVoted = () => {
+  const isDownVoted = (e) => {
+    let question = e.params.id;
     return question.downvotes.includes(currentUser._id);
   };
 
-  const upVote = async () => {
+  const upVote = async (e) => {
+    let question = e.params.id;
     question.upvotes = [...question.upvotes, currentUser._id];
     await question.save();
   };
 
-  const downVote = async () => {
+  const downVote = async (e) => {
+    let question = e.params.id;
     question.downvotes = [questions.downvotes, currentUser._id];
     await question.save();
   };
 
-  const removeUpVote = async () => {
+  const removeUpVote = async (e) => {
+    let question = e.params.id;
     question.upvotes = question.upvotes.filter((user) => !currentUser);
     await question.save();
   };
 
-  const removeDownVote = async () => {
+  const removeDownVote = async (e) => {
+    let question = e.params.id;
     question.downvotes = question.downvotes.filter((user) => !currentUser);
     await question.save();
   };
