@@ -1,136 +1,132 @@
 import React, { useContext, useState } from 'react';
-import Answer from '../Answer/Answer';
-import './Post.css';
+import axios from 'axios';
+import classNames from 'classnames';
 import { Avatar } from '@material-ui/core';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import { AppContext } from '../../context/AppContext';
-import axios from 'axios';
+import './Post.css';
+
+const AnswerInput = ({ onSubmit, questionId }) => {
+  const [answer, setAnswer] = useState('');
+
+  const handleChange = (e) => {
+    setAnswer(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(questionId, answer);
+    setAnswer('');
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        value={answer}
+        onChange={handleChange}
+        placeholder={'Post an answer here'}
+      />
+    </form>
+  );
+};
 
 const Post = ({ questions }) => {
-  const { currentUser } = useContext(AppContext);
-  const { answers, setAnswers } = useContext(AppContext);
-  const INITIAL_STATE = { answer: '' };
-  const [formData, setFormData] = useState(INITIAL_STATE);
+  const { currentUser, fetchQuestions } = useContext(AppContext);
+
   const cannotVote = () => {
     alert('Log in or sign up to vote!');
   };
 
-  const isUpVoted = (e) => {
-    let question = e.params.id;
-    return question.upvotes.includes(currentUser._id);
+  const hasVoted = (votes) => {
+    return votes.includes(currentUser._id);
   };
 
-  const isDownVoted = (e) => {
-    let question = e.params.id;
-    return question.downvotes.includes(currentUser._id);
+  const handleVote = async (question, upVote = false) => {
+    await axios.patch(
+      `/api/questions/vote/${question._id}`,
+      { upVote },
+      { withCredentials: true }
+    );
+
+    fetchQuestions();
   };
 
-  const upVote = async (e) => {
-    let question = e.params.id;
-    question.upvotes = [...question.upvotes, currentUser._id];
-    await question.save();
-  };
-
-  const downVote = async (e) => {
-    let question = e.params.id;
-    question.downvotes = [questions.downvotes, currentUser._id];
-    await question.save();
-  };
-
-  const removeUpVote = async (e) => {
-    let question = e.params.id;
-    question.upvotes = question.upvotes.filter((user) => !currentUser);
-    await question.save();
-  };
-
-  const removeDownVote = async (e) => {
-    let question = e.params.id;
-    question.downvotes = question.downvotes.filter((user) => !currentUser);
-    await question.save();
-  };
-
-  const handleSubmit = (e, id) => {
-    // `/api/questions/${qid}/answers`
-    console.log(id);
-    e.preventDefault();
+  const handleSubmit = (questionId, answer) => {
     axios
-      .post(`/api/questions/${id}/answers`, formData, {
-        withCredentials: true
-      })
-      .then((res) => {
-        console.log(res.data);
+      .post(
+        `/api/questions/${questionId}/answers`,
+        { text: answer },
+        {
+          withCredentials: true
+        }
+      )
+      .then(() => {
+        fetchQuestions();
       });
-    setAnswers({ ...answers, formData });
-    setFormData(INITIAL_STATE);
-  };
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
     <>
-      {questions.map((question) => (
-        <div className="post">
-          <div className="post__top">
-            <Avatar src={question.author.avatar} className="post__avatar" />
-            <div className="post_topInfo">
-              <h3 id="question_author">{question.author.username}</h3>
-            </div>
-          </div>
+      {questions.map((question) => {
+        const hasUpVoted = hasVoted(question.upvotes);
+        const hasDownVoted = hasVoted(question.downvotes);
 
-          <div className="post__bottom">
-            <p id="question_text">{question.text}</p>
-          </div>
-
-          <div className="post__image">
-            <img src={question?.image} />
-          </div>
-
-          <div className="post__options">
-            <div
-              id="upvote"
-              className="post__option"
-              onClick={() =>
-                currentUser
-                  ? isUpVoted()
-                    ? removeUpVote()
-                    : upVote()
-                  : cannotVote()
-              }
-            >
-              <ThumbUpIcon />
-              <p>{question.upvotes?.length}</p>
+        return (
+          <div className="post">
+            <div className="post__top">
+              <Avatar src={question.author.avatar} className="post__avatar" />
+              <div className="post_topInfo">
+                <h3 id="question_author">{question.author.username}</h3>
+              </div>
             </div>
-            <div
-              id="downvote"
-              className="post__option"
-              onClick={() =>
-                currentUser
-                  ? isDownVoted()
-                    ? removeDownVote()
-                    : downVote()
-                  : cannotVote()
-              }
-            >
-              <ThumbDownIcon />
-              <p>{question.downvotes?.length}</p>
+
+            <div className="post__bottom">
+              <p id="question_text">{question.text}</p>
             </div>
-            <div id="replybutton" className="post__option2">
-              <ChatBubbleOutlineIcon />
-              <form onSubmit={(e) => handleSubmit(e, question._id)}>
-                <input
-                  value={formData.answers}
-                  onChange={handleChange}
-                  placeholder={'Post an answer here'}
+
+            <div className="post__image">
+              <img src={question?.image} />
+            </div>
+
+            <div className="post__options">
+              <div
+                id="upvote"
+                className={classNames('post__option', { voted: hasUpVoted })}
+                onClick={() =>
+                  currentUser ? handleVote(question, true) : cannotVote()
+                }
+              >
+                <ThumbUpIcon />
+                <p>{question.upvotes?.length}</p>
+              </div>
+              <div
+                id="downvote"
+                className={classNames('post__option', { voted: hasDownVoted })}
+                onClick={() =>
+                  currentUser ? handleVote(question) : cannotVote()
+                }
+              >
+                <ThumbDownIcon />
+                <p>{question.downvotes?.length}</p>
+              </div>
+              <div id="replybutton" className="post__option2">
+                <ChatBubbleOutlineIcon />
+                <AnswerInput
+                  onSubmit={handleSubmit}
+                  questionId={question._id}
                 />
-              </form>
+              </div>
+              <div>
+                {question.answers.map((answer) => (
+                  <p>{answer.text}</p>
+                ))}
+              </div>
             </div>
-            <div>{/* <Answer answers={question.answers} /> */}</div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </>
   );
 };

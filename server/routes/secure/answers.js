@@ -6,21 +6,25 @@ const router = require('express').Router({ mergeParams: true }),
  * POST answer to a question
  */
 router.post('/', async (req, res) => {
-  console.log('In POst Router', req.params);
-  const newAnswer = new Answer(req.body);
-  console.log('newAnswer', newAnswer);
-  console.log('user', req.user);
-  newAnswer.question = req.params.qId;
+  const { _id: currentUserId } = req.user;
+  const { qId } = req.params;
+  const { text } = req.body;
 
-  Question.findById(req.params.qId)
-    .then((question) => {
-      newAnswer.save().then((createdAnswer) => {
-        question.answers.push(createdAnswer._id);
+  const newAnswer = new Answer({
+    text,
+    question: qId,
+    author: currentUserId
+  });
 
-        question.save().then(res.json(createdAnswer));
-      });
-    })
-    .catch((err) => res.status(500).json('Error: ', err));
+  await newAnswer.save();
+
+  const question = await Question.findById(qId);
+
+  question.answers.push(newAnswer);
+
+  await question.save();
+
+  res.send({ answer: newAnswer });
 });
 
 /**
