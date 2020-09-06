@@ -11,6 +11,7 @@ const CreateQuestion = () => {
   const INITIAL_STATE = { question: '' };
   const { questions, setQuestions } = useContext(AppContext);
   const [formData, setFormData] = useState(INITIAL_STATE);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -38,7 +39,7 @@ const CreateQuestion = () => {
             autoFocus
             onChange={handleChange}
             className="question__input"
-            placeholder={'Post a question here'}
+            placeholder={'Post a question'}
           />
 
           <button type="submit">Hidden submit</button>
