@@ -20,8 +20,8 @@ const Widget = () => {
   };
 
   return (
-    <div>
-      <h1>Did you know?</h1>
+    <div id="widget">
+      <h1 className="heading">Did you know?</h1>
       <h4 className="funFact">{facts[activeFact]}</h4>
       <Button variant="contained" onClick={handleClick}>
         Tell Me More
