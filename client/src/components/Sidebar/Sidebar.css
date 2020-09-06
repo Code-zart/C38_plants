@@ -1,6 +1,11 @@
 .sidebar {
-    padding: 25px 10px;
-    flex: 0=33;
-    position: sticky;
-    background-color: #7f5af0;
+  padding: 25px 10px;
+  flex: 0=33;
+  position: sticky;
+  background-color: #7f5af0;
+  width: 50%;
+}
+
+.sidebar > h4 {
+  padding: 10px 20px;
 }
