@@ -5,11 +5,10 @@ const Answer = ({ answers }) => {
   // bring question.answers from "Post",
   // filteredAnswers == question.answers
   return (
-    <>
-      {answers.map((answer) => (
-        <h1>{answer.text}</h1>
-      ))}
-    </>
+    <div className="answers">
+      <h3>Answer 1</h3>
+      <h3>Answer 2</h3>
+    </div>
   );
 };
 
