@@ -1,44 +1,48 @@
 #profileOverview {
-  flex: 1;
-  padding: 30px 150px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    flex: 1;
+    padding: 30px 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #242629;
 }
 
 #coverPhoto {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
+    width: 100%;
+    height: 500px;
+    padding: 20px;
+    background-color: #16161a;
+    object-fit: cover;
 }
 
 #profileBox {
-  width: 100%;
-  margin-top: -150;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  object-position: 100px;
+    width: 100%;
+    margin-top: -150;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-position: 100px;
 }
 
 #profileCard {
-  width: 300px;
-  text-align: center;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    width: 300px;
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #profileImage {
-  width: 200px;
-  height: 200px;
-  border-radius: 100px;
-  margin-top: -100px;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    margin-top: -100px;
 }
 
 #profileName {
-  margin: 20px;
+    color: #fffffe;
+    margin: 20px;
 }
