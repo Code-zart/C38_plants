@@ -22,6 +22,7 @@ const CreateQuestion = () => {
     setFormData(INITIAL_STATE);
   };
   const handleChange = (e) => {
+    console.log(e.target.value)
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   return (
@@ -40,6 +41,16 @@ const CreateQuestion = () => {
             className="question__input"
             placeholder={'Post a question'}
           />
+          <select onChange={handleChange} name="category">
+            <option value="indoor_plants">" 🎍 Indoor Plants"</option>
+            <option value="outdoor_plants">" 🌴 Outdoor Plants"</option>
+            <option value="cacti">" 🌵 Cacti"</option>
+            <option value="vegetables">" 🥕 Vegetables"</option>
+            <option value="fruit_trees">" 🌲 Fruit trees"</option>
+            <option value="herbs">" 🌿 Herbs"</option>
+            <option value="garden">" 💐 Garden"</option>
+            <option value="problems">" 🥀 Problems"</option>
+          </select>
           <button type="submit">Hidden submit</button>
         </form>
       </div>
