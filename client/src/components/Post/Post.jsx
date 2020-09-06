@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Answer from '../Answer/Answer';
 import './Post.css';
 import { Avatar } from '@material-ui/core';
@@ -6,10 +6,13 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import { AppContext } from '../../context/AppContext';
+import axios from 'axios';
 
 const Post = ({ questions }) => {
   const { currentUser } = useContext(AppContext);
-
+  const { answers, setAnswers } = useContext(AppContext);
+  const INITIAL_STATE = { answer: '' };
+  const [formData, setFormData] = useState(INITIAL_STATE);
   const cannotVote = () => {
     alert('Log in or sign up to vote!');
   };
@@ -48,6 +51,22 @@ const Post = ({ questions }) => {
     await question.save();
   };
 
+  const handleSubmit = (e) => {
+    // `/api/questions/${qid}/answers`
+    e.preventDefault();
+    axios
+      .post(`/api/questions/answers`, formData, {
+        withCredentials: true
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+    setAnswers({ ...answers, formData });
+    setFormData(INITIAL_STATE);
+  };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   return (
     <>
       {questions.map((question) => (
@@ -64,7 +83,7 @@ const Post = ({ questions }) => {
           </div>
 
           <div className="post__image">
-            <img src={question?.image} alt="plant" />
+            <img src={question?.image} />
           </div>
 
           <div className="post__options">
@@ -98,16 +117,19 @@ const Post = ({ questions }) => {
             </div>
             <div id="replybutton" className="post__option2">
               <ChatBubbleOutlineIcon />
-              <p>Comment</p>
+              <form onSubmit={handleSubmit}>
+                <input
+                  value={formData.answers}
+                  onChange={handleChange}
+                  placeholder={'Post an answer here'}
+                />
+              </form>
             </div>
-            <div>
-              <Answer answers={question.answers} />
-            </div>
+            <div>{/* <Answer answers={question.answers} /> */}</div>
           </div>
         </div>
       ))}
     </>
   );
 };
-
 export default Post;
