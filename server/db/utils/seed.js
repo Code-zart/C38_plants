@@ -75,7 +75,9 @@ const seedDb = async () => {
       image: `${faker.image.nature()}?random=${Math.round(
         Math.random() * 10e12
       )}`,
-      author: userIdArray[Math.floor(Math.random() * userIdArray.length)]
+      author: userIdArray[Math.floor(Math.random() * userIdArray.length)],
+      upvotes: createRandomArray(userIdArray, 0.4),
+      downvotes: createRandomArray(userIdArray, 0.6)
     });
     questionIdArray.push(question._id);
 
@@ -97,7 +99,9 @@ const seedDb = async () => {
       text: faker.lorem.sentences(2),
       question:
         questionIdArray[Math.floor(Math.random() * questionIdArray.length)],
-      author: userIdArray[Math.floor(Math.random() * userIdArray.length)]
+      author: userIdArray[Math.floor(Math.random() * userIdArray.length)],
+      upvotes: createRandomArray(userIdArray, 0.4),
+      downvotes: createRandomArray(userIdArray, 0.6)
     });
     answerIdArray.push(answer._id);
 
@@ -111,55 +115,3 @@ const seedDb = async () => {
   console.log('Example of an Answer:', resolvedAnswers[0]);
 };
 seedDb();
-
-/**
- * Populate Questions
- */
-
-// const populateQuestionPromises = questionPromises.map(async (question) => {
-//   question.answers = createRandomArray(answerIdArray).slice(
-//     0,
-//     Math.round(Math.random * 10)
-//   );
-//   // await question.save();
-//   return question;
-// });
-
-// const populatedQuestions = await Promise.all(populateQuestionPromises);
-
-// console.log('Example of a populated Question:', populatedQuestions[0]);
-// = async () => {
-//   for (question in resolvedQuestions) {
-// let x = 1;
-// question.answers = createRandomArray(answerIdArray).slice(
-//   0,
-//   Math.round(Math.random * 10)
-// );
-//     x++;
-//     console.log(`question ${x} populated.`);
-//   }
-//   console.log(
-//     'nested answers of random question',
-//     resolvedQuestions[0].answers
-//   );
-// };
-// populateQuestions();
-
-/**
- * First, create all users/questions/answers with only required fields populated. -- DONE
- *
- * Then, populate users with questions, answers, upvotes, downvotes (etc.)
- * 
- * const populaterUserFields = async () => {
-    const userFieldPromises = resolvedUsers.map(async (user) => {
-      user.questions = createRandomArray(questionIdArray);
-
-      await user.save();
-      return user;
-    });
-    const populatedUsers = await Promise.all(userFieldPromises);
-    console.log('Populated User:', populatedUsers[0]);
-  };
-  populater
- * Associate question to user, answer to question, and user (different that original) to question
- */
