@@ -65,6 +65,11 @@ const seedDb = async () => {
   });
   console.log('Example of a User:', resolvedUsers[0]);
 
+  const userMap = resolvedUsers.reduce((acc, user) => {
+    acc[user._id] = user;
+    return acc;
+  }, {});
+
   /**
    * CREATE QUESTIONS - 80
    */
@@ -84,6 +89,7 @@ const seedDb = async () => {
     await question.save();
     return question;
   });
+
   const resolvedQuestions = await Promise.all(questionPromises);
   await Question.countDocuments({}, function (err, count) {
     console.log('Number of questions:', count);

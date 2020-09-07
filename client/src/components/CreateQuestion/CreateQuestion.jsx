@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { AppContext } from '../../context/AppContext';
 import { Avatar } from '@material-ui/core';
 import './CreateQuestion.css';
-// import VideoCamIcon from '@material-ui/icons/VideoCam';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import axios from 'axios';

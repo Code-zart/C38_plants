@@ -40,7 +40,7 @@ const Post = ({ questions }) => {
   };
 
   const hasVoted = (votes) => {
-    return votes.includes(currentUser._id);
+    if (currentUser) return votes.includes(currentUser._id);
   };
 
   const handleVote = async (question, upVote = false) => {
