@@ -14,20 +14,16 @@ const CreateQuestion = () => {
     e.preventDefault();
     axios
       .post('/api/questions/', formData, { withCredentials: true })
-      .then((res) => {
-        console.log(res.data);
-      });
+      .then((res) => {});
     setQuestions({ ...questions, formData });
     setFormData(INITIAL_STATE);
   };
   const handleChange = (e) => {
-    console.log(e.target.value);
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   return (
     <div className="question">
       <div className="question__top">
-        <Avatar />
         <form onSubmit={handleSubmit}>
           <input
             value={formData.question}
@@ -40,7 +36,6 @@ const CreateQuestion = () => {
             className="question__input"
             placeholder={'Post a question'}
           />
-
           <select onChange={handleChange} name="category">
             <option value="indoor_plants">🎍 Indoor Plants</option>
             <option value="outdoor_plants">🌴 Outdoor Plants</option>
@@ -51,17 +46,12 @@ const CreateQuestion = () => {
             <option value="garden">💐 Garden</option>
             <option value="problems">🥀 Problems</option>
           </select>
-
           <button type="submit">Hidden submit</button>
         </form>
       </div>
 
       <div className="question__bottom">
-        <div className="question__option">
-          {/* <VideoCamIcon style={{ color: 'red' }} /> */}
-          <h3>Live Video</h3>
-        </div>
-
+        <div className="question__option"></div>
         <div className="question__option">
           <InsertEmoticonIcon style={{ color: 'orange' }} />
           <h3>Feeling/Activity</h3>
@@ -69,8 +59,10 @@ const CreateQuestion = () => {
         <div className="question__option">
           <PhotoLibraryIcon style={{ color: 'green' }} />
           <form>
-            <input type="file"></input>
-            <button type="submit">Submit</button>
+            <input id="image_input" type="file"></input>
+            <button id="image_input" type="submit">
+              Submit
+            </button>
           </form>
         </div>
       </div>

@@ -89,11 +89,15 @@ const Post = ({ questions }) => {
             <div className="post__image">
               <img src={question?.image} />
             </div>
-
+            <div className="answer__field">
+              {question.answers.map((answer) => (
+                <p>⚪ {answer.text}</p>
+              ))}
+            </div>
             <div className="post__options">
               <div
                 id="upvote"
-                className={classNames('post__option', { voted: hasUpVoted })}
+                className={classNames('post__option', { upvoted: hasUpVoted })}
                 onClick={() =>
                   currentUser ? handleVote(question, true) : cannotVote()
                 }
@@ -103,7 +107,9 @@ const Post = ({ questions }) => {
               </div>
               <div
                 id="downvote"
-                className={classNames('post__option', { voted: hasDownVoted })}
+                className={classNames('post__option', {
+                  downvoted: hasDownVoted
+                })}
                 onClick={() =>
                   currentUser ? handleVote(question) : cannotVote()
                 }
@@ -117,11 +123,6 @@ const Post = ({ questions }) => {
                   onSubmit={handleSubmit}
                   questionId={question._id}
                 />
-              </div>
-              <div>
-                {question.answers.map((answer) => (
-                  <p>{answer.text}</p>
-                ))}
               </div>
             </div>
           </div>

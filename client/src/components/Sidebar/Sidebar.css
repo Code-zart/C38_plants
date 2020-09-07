@@ -2,10 +2,20 @@
   padding: 25px 10px;
   flex: 0=33;
   position: sticky;
-  background-color: #7f5af0;
-  width: 50%;
+  background-color: #6a3ef0;
+  width: 35rem;
+  box-shadow: 3px 2px 5px 2px rgba(44, 182, 125, 0.9);
 }
 
 .sidebar > h4 {
   padding: 10px 20px;
+}
+#sidebar_button {
+  border: none;
+  background: none;
+  width: fit-content;
+}
+#sidebar_button:hover {
+  background-color: #242629;
+  cursor: pointer;
 }

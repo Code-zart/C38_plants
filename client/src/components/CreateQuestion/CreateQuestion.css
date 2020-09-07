@@ -1,66 +1,73 @@
 .question {
-    display: flex;
-    margin-top: 30px;
-    flex-direction: column;
-    border-radius: 15px;
-    box-shadow: 0px 0px 4px whitesmoke;
-    width: 100%;
-    border: 3px solid black;
+  display: flex;
+  margin-top: 30px;
+  flex-direction: column;
+  border-radius: 15px;
+  box-shadow: 3px 2px 5px 2px rgba(44, 182, 125, 0.9);
+  width: 100%;
+  margin-bottom: 25px;
+  color: white;
 }
 
 .question__top {
-    display: flex;
-    border-bottom: 3px solid black;
-    padding: 15px;
-    background-color: #7f5af0;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+  display: flex;
+  padding: 15px;
+  background-color: #6a3ef0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
-.question__top>form {
-    flex: 1;
-    display: flex;
+.question__top > form {
+  flex: 1;
+  display: flex;
 }
 
-.question__top>form>input {
-    outline-width: 0;
-    border: none;
-    padding: 5px 20px;
-    margin: 0 10px;
-    border-radius: 999px;
-    background-color: #eff2f5;
+.question__top > form > input {
+  outline-width: 0;
+  border: none;
+  padding: 5px 20px;
+  margin: 0 10px;
+  border-radius: 999px;
+  background-color: #eff2f5;
 }
 
-.question__top>form>button {
-    display: none;
+.question__top > form > button {
+  display: none;
 }
 
 .question__input {
-    flex: 1;
+  flex: 1;
 }
 
 .question__bottom {
-    display: flex;
-    justify-content: space-evenly;
-    background-color: #94a1b2;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #242629;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 .question__option {
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    margin: 5px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  margin: 5px;
 }
 
-.question__option>h3 {
-    font-size: medium;
-    margin-left: 10px;
-    cursor: pointer;
+.question__option > h3 {
+  font-size: medium;
+  margin-left: 10px;
+  cursor: pointer;
 }
 
 .question__option:hover {
-    background-color: #eff2f5;
-    border-radius: 20px;
+  border-radius: 20px;
+}
+
+#image_input {
+  border-radius: 20px 20px 20px 20px;
+  width: 15em;
+  margin-top: 5px;
+  background-color: #2cb67d;
+  border: none;
 }
