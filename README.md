@@ -1,27 +1,25 @@
 # Final Project
 
-## Setup
+![GrapaVine Logo](client/src/images/Logo.png)
 
-- `git clone` this repo
-- `cd` into it.
-- `yarn install`
-- `cd client && yarn install`
-- `cp .env.sample .env`
+# _A Community for Plant Enthusiasts_
 
-## Available build commands
+## GrapeVine was built in collaboration between some of the brightest students at Wyncode cohort 38.
 
-- `yarn dev`: Runs BOTH your Express.JS and React developer environment locally at the same time. Any logs coming from Express will be prefaced with `[0]`, any logs from `create-react-app` will be prefaced with `[1]`.
-- `yarn server`: Runs JUST your Express.JS server.
-- `yarn client`: Runs JUST your front-end React app.
+### Kenny Suengas, Daniel Riera, Ana Maria Orduz, and Moshe Paul
 
-Open [http://localhost:3000](http://localhost:3000) to view your local React app in the browser. The page will reload if you make edits.
+#### Click this link to view it live: https://git.heroku.com/c38-grapevine.git
 
-## To deploy
+#### Tech Stack
 
-NOTE: Heroku specifically runs `npm start`, so don't remove that from your package.json file.
-
-- `heroku create your-app-name`
-- `heroku config:set MONGODB_URL=<insertYourAtlasDbUri>`
-- `git push heroku master`
-
-
+| Client-side      | Server-side           |
+| ---------------- | --------------------- |
+| React            | MongoDB               |
+| Axios            | Moongoose             |
+| React-dom        | Mongoose-autopopulate |
+| React-router-dom | JsonWebToken          |
+| Material-ui      | Passport              |
+| Heroku           | Nodejs                |
+| Axios            | Express               |
+| ⠀⠀⠀⠀⠀⠀           | Faker                 |
+| ⠀⠀⠀⠀⠀⠀           | Classnames            |

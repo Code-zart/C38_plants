@@ -98,8 +98,9 @@ const Header = () => {
             </div>
           ) : (
             <>
-              <p>Welcome {currentUser.username} </p>
+              <h4 id="welcomeText">Welcome {currentUser.username} </h4>
               <Button
+                id="button"
                 className="Button"
                 variant="contained"
                 onClick={toggleLogout}

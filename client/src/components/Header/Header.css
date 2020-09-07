@@ -1,68 +1,77 @@
 .header {
-    padding: 10px 50px;
-    display: flex;
-    justify-content: space-between;
-    z-index: 100;
-    background-color: #2cb67d;
-    top: 0;
-    box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
+  padding: 10px 50px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 100;
+  background-color: #242629;
+  top: 0;
+  box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
 }
 
-.header__left>img {
-    height: 230px;
-    width: 250px;
-    margin: -60px;
+.header__left > img {
+  height: 230px;
+  width: 250px;
+  margin: -60px;
 }
 
 .header__input {
-    display: flex;
-    align-items: center;
-    background-color: #eff2f5;
-    padding: 10px;
-    height: 2.5rem;
-    width: 55%;
-    margin-left: 10px;
-    margin-top: 1.5rem;
-    border-radius: 999px;
+  display: flex;
+  align-items: center;
+  background-color: #eff2f5;
+  padding: 10px;
+  height: 2.5rem;
+  width: 55%;
+  margin-left: 10px;
+  margin-top: 1.5rem;
+  border-radius: 999px;
 }
 
-.header__input>input {
-    border: none;
-    background-color: transparent;
-    outline-width: 0;
+.header__input > input {
+  border: none;
+  background-color: transparent;
+  outline-width: 0;
 }
 
 .header__option {
-    display: flex;
-    align-items: center;
-    padding: 10px 30px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 10px 30px;
+  cursor: pointer;
 }
 
 .header__option:hover {
-    background-color: eff2f5;
-    display: flex;
-    border-radius: 10px;
-    align-items: center;
-    padding: 0 30px;
-    border-bottom: none;
+  background-color: eff2f5;
+  display: flex;
+  border-radius: 10px;
+  align-items: center;
+  padding: 0 30px;
+  border-bottom: none;
 }
 
 .header__right {
-    display: flex;
-    margin-top: 0rem;
-    padding: 10px 10px;
+  display: flex;
+  margin-top: 0rem;
+  padding: 10px 10px;
 }
 
 .MuiButton-contained {
-    height: 1.8rem;
-    padding: 10px 20px;
-    border-radius: 10px;
-    margin-top: 1.2rem;
-    margin-right: 1rem;
-    background-color: #b39ddb;
+  height: 1.8rem;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-top: 1.2rem;
+  margin-right: 1rem;
+  background-color: #6a3ef0;
 }
 
 .MuiButton-contained:hover {
-    background-color: #00bcd4;
+  background-color: #b39ddb;
+}
+
+#welcomeText {
+  margin-bottom: 1rem;
+  color: whitesmoke;
+}
+
+#button {
+  background-color: #6a3ef0;
 }
