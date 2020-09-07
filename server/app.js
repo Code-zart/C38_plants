@@ -37,7 +37,7 @@ app.use(
 // Any authentication middleware and related routing would be here.
 app.use('/api/users', usersRouter);
 app.use('/api/questions', questionsRouter);
-app.use('/api/questions/:qId/answers', answersRouter); // should this be the same path as questions?
+app.use('/api/questions/:qId/answers', answersRouter);
 // Handle React routing, return all requests to React app
 if (process.env.NODE_ENV === 'production') {
   app.get('*', (request, response) => {

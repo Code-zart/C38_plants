@@ -5,12 +5,12 @@ const router = require('express').Router(),
   mongoose = require('mongoose');
 
 /**
- * GET current user // WORKING
+ * GET current user
  */
 router.get('/me', async (req, res) => res.json(req.user));
 
 /**
- * UPDATE a user // NOT WORKING
+ * UPDATE a user
  */
 router.patch('/me', async (req, res) => {
   const updates = Object.keys(req.body);
@@ -32,7 +32,7 @@ router.patch('/me', async (req, res) => {
 });
 
 /**
- * LOGOUT a user // WORKING
+ * LOGOUT a user
  */
 router.post('/logout', async (req, res) => {
   try {
@@ -62,13 +62,12 @@ router.post('/logoutAll', async (req, res) => {
 });
 
 /**
- * DELETE a user // WORKING
+ * DELETE a user
  */
 router.delete('/me', async (req, res) => {
   try {
     await req.user.remove();
-    // this is not defined
-    // sendCancellationEmail(req.user.email, req.user.name);
+
     res.clearCookie('jwt');
     res.json({ message: 'user deleted' });
   } catch (e) {
@@ -93,7 +92,7 @@ router.post('/api/users/avatar', async (req, res) => {
 });
 
 /**
- * UPDATE User Password // WORKING
+ * UPDATE User Password
  */
 router.put('/password', async (req, res) => {
   try {

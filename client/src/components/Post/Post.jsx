@@ -40,7 +40,7 @@ const Post = ({ questions }) => {
   };
 
   const hasVoted = (votes) => {
-    // return votes.includes(currentUser._id);
+    if (currentUser) return votes.includes(currentUser._id);
   };
 
   const handleVote = async (question, upVote = false) => {
@@ -97,7 +97,7 @@ const Post = ({ questions }) => {
             <div className="post__options">
               <div
                 id="upvote"
-                className={classNames('post__option', { voted: hasUpVoted })}
+                className={classNames('post__option', { upvoted: hasUpVoted })}
                 onClick={() =>
                   currentUser ? handleVote(question, true) : cannotVote()
                 }
@@ -107,7 +107,9 @@ const Post = ({ questions }) => {
               </div>
               <div
                 id="downvote"
-                className={classNames('post__option', { voted: hasDownVoted })}
+                className={classNames('post__option', {
+                  downvoted: hasDownVoted
+                })}
                 onClick={() =>
                   currentUser ? handleVote(question) : cannotVote()
                 }

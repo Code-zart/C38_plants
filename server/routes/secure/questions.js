@@ -5,7 +5,7 @@ const router = require('express').Router({ mergeParams: true }),
   app = express();
 
 /**
- * POST a new question // WORKING
+ * POST a new question
  */
 router.post('/', async (req, res) => {
   try {
@@ -74,7 +74,7 @@ router.delete('/:id', (req, res) => {
 });
 
 /**
- * UPLOAD Image for Question -- SEE CLOUDINARY EXAMPLE
+ * UPLOAD Image for Question
  */
 router.use(express.json({ limit: '50mb' }));
 router.use(express.urlencoded({ limit: '50mb', extended: true }));

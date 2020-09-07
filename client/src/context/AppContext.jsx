@@ -36,7 +36,6 @@ const AppContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    //incase the user refreshes & context is cleared
     if (user && !currentUser) {
       axios
         .get('/api/users/me', { withCredentials: true })

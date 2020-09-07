@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import './UserProfile.css';
-import Button from '@material-ui/core/Button';
 import Newsfeed from '../../components/Newsfeed/Newsfeed';
 import { AppContext } from '../../context/AppContext';
 
@@ -19,7 +18,7 @@ const UserProfile = () => {
         <img
           id="profileImage"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRs7QPGzBefaOz5xC_y7q_Ncne7Kd8J8f85xw&usqp=CAU"
-          alt="Rick Sanchez rick and morty"
+          alt="userprofile"
         />
 
         <h3 id="profileName">{currentUser?.username}</h3>

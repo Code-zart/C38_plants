@@ -1,8 +1,7 @@
-const mongoose = require('mongoose'),
-  { categories } = require('../api/words');
-(Answer = require('./answer')),
-  (User = require('./user')),
-  ({ Schema } = mongoose);
+const mongoose = require('mongoose');
+const Answer = require('./answer');
+const User = require('./user');
+const { Schema } = mongoose;
 
 const QuestionSchema = new Schema(
   {
@@ -14,7 +13,7 @@ const QuestionSchema = new Schema(
         autopopulate: true
       }
     ],
-    categories: { type: String, enum: categories, max: 3 },
+    categories: { type: String },
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',

@@ -10,3 +10,12 @@
 .sidebar > h4 {
   padding: 10px 20px;
 }
+#sidebar_button {
+  border: none;
+  background: none;
+  width: fit-content;
+}
+#sidebar_button:hover {
+  background-color: #242629;
+  cursor: pointer;
+}

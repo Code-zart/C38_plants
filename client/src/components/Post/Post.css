@@ -45,7 +45,6 @@
 .post__options {
   padding-top: 10px;
   background-color: #94a1b2;
-  /* border-top: 1px solid lightgray; */
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   display: flex;
@@ -90,8 +89,12 @@
   border-radius: 10px;
 }
 
-.voted {
-  background-color: red;
+.downvoted {
+  color: rgb(134, 13, 13);
+}
+
+.upvoted {
+  color: #168557;
 }
 
 .answer__field {
