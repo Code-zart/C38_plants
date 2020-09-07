@@ -1,16 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Sidebar.css';
 import SidebarRow from '../SideBarRow/SidebarRow';
 import { Link } from 'react-router-dom';
+import { AppContext } from '../../context/AppContext';
 
 const Sidebar = () => {
+  const { currentUser } = useContext(AppContext);
   return (
     <div className="sidebar">
       <Link to="/profile">
-        <SidebarRow
-          src="https://cdna.artstation.com/p/assets/images/images/013/003/132/large/joe-parente-rick-final.jpg?1537572885&dl=1"
-          title="Rick Sanchez "
-        />
+        <SidebarRow title={currentUser?.username} />
       </Link>
 
       <h4>Filter By:</h4>

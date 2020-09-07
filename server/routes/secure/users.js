@@ -79,7 +79,7 @@ router.delete('/me', async (req, res) => {
 /**
  * UPLOAD Avatar
  */
-router.post('/avatar', async (req, res) => {
+router.post('/api/users/avatar', async (req, res) => {
   try {
     const response = await cloudinary.uploader.upload(
       req.files.avatar.tempFilePath

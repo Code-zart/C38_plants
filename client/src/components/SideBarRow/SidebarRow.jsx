@@ -8,7 +8,7 @@ const SidebarRow = ({ src, Icon, title, category }) => {
 
   const handleFilter = () => {
     let newQuestions = questions;
-    new questions.filter.console.log();
+    // new questions.filter.console.log();
     //  add .filter js method apply to context of questions, read newly filtered questions to context, similiar to
     setQuestions({ newQuestions });
   };

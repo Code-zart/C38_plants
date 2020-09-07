@@ -28,7 +28,6 @@ const CreateQuestion = () => {
   return (
     <div className="question">
       <div className="question__top">
-        <Avatar />
         <form onSubmit={handleSubmit}>
           <input
             value={formData.question}
@@ -60,7 +59,7 @@ const CreateQuestion = () => {
       <div className="question__bottom">
         <div className="question__option">
           {/* <VideoCamIcon style={{ color: 'red' }} /> */}
-          <h3>Live Video</h3>
+          {/* <h3>Live Video</h3> */}
         </div>
 
         <div className="question__option">

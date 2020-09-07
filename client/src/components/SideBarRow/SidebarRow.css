@@ -6,7 +6,7 @@
 }
 
 .sidebarRow:hover {
-  background-color: grey;
+  background-color: #242629;
   border-radius: 10px;
   transform: scale(1.07);
 }

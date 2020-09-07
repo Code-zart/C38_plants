@@ -40,7 +40,7 @@ const Post = ({ questions }) => {
   };
 
   const hasVoted = (votes) => {
-    return votes.includes(currentUser._id);
+    // return votes.includes(currentUser._id);
   };
 
   const handleVote = async (question, upVote = false) => {
@@ -89,7 +89,11 @@ const Post = ({ questions }) => {
             <div className="post__image">
               <img src={question?.image} />
             </div>
-
+            <div className="answer__field">
+              {question.answers.map((answer) => (
+                <p>⚪ {answer.text}</p>
+              ))}
+            </div>
             <div className="post__options">
               <div
                 id="upvote"
@@ -117,11 +121,6 @@ const Post = ({ questions }) => {
                   onSubmit={handleSubmit}
                   questionId={question._id}
                 />
-              </div>
-              <div>
-                {question.answers.map((answer) => (
-                  <p>{answer.text}</p>
-                ))}
               </div>
             </div>
           </div>

@@ -6,6 +6,7 @@ const AppContext = createContext();
 const AppContextProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [answers, setAnswers] = useState([]);
+  const [loading, setLoading] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [currentFilter, setCurrentFilter] = useState(null);
@@ -66,7 +67,9 @@ const AppContextProvider = ({ children }) => {
         filteredQuestions,
         setFilteredQuestions,
         fetchQuestions,
-        fetchAnswers
+        fetchAnswers,
+        loading,
+        setLoading
       }}
     >
       {children}
